@@ -1,6 +1,6 @@
 <div class="app">
-  <main class="profile-container">
-    <header class="profile-header">
+  <div class="profile-container">
+    <header>
     <div id="profile-avatar" class="contact-avatar"></div>
     <h2>Имя</h2>
     </header>
@@ -11,10 +11,10 @@
       {{> FieldProfile fieldName="Фамилия" fieldValue=second_name}}
       {{> FieldProfile fieldName="Телефон" fieldValue=phone}}
   </main>
-  <footer class="profile-footer">
+  <footer>
     {{> Button id="edit-data" text="Изменить данные"}}
     {{> Button id="edit-password" text="Изменить пароль"}}
     {{> Button id="exit" text="Выйти"}}
   </footer>
-  </main>
+  </div>
 </div>

@@ -27,40 +27,34 @@ export default class App {
   }
 
   render() {
-    try {
-      let template;
-      if (this.state.currentPage === "auth") {
-        template = Handlebars.compile(Pages.AuthPage);
-        this.appElement.innerHTML = template();
-      } else if (this.state.currentPage === "singIn") {
-        template = Handlebars.compile(Pages.SingInPage);
-        this.appElement.innerHTML = template();
-      } else if (this.state.currentPage === "message") {
-        template = Handlebars.compile(Pages.MessagesPage);
-        this.appElement.innerHTML = template({
-          contacts,
-          dialog,
-        });
-      } else if (this.state.currentPage === "profile") {
-        template = Handlebars.compile(Pages.ProfilePage);
-        this.appElement.innerHTML = template(profileData);
-      } else if (this.state.currentPage === "profileEdit") {
-        template = Handlebars.compile(Pages.ProfileEditPage);
-        this.appElement.innerHTML = template(profileData);
-      } else if (this.state.currentPage === "passwordEdit") {
-        template = Handlebars.compile(Pages.PasswordEditPage);
-        this.appElement.innerHTML = template();
-      } else if (this.state.currentPage === "avatarEdit") {
-        template = Handlebars.compile(Pages.AvatarEditPage);
-        this.appElement.innerHTML = template();
-      } else {
-        template = Handlebars.compile(Pages.NotFoundPage);
-        this.appElement.innerHTML = template();
-      }
-    } catch {
-      template = Handlebars.compile(Pages.ErrorPage);
+    let template;
+    if (this.state.currentPage === "auth") {
+      template = Handlebars.compile(Pages.AuthPage);
       this.appElement.innerHTML = template();
-      this.state.currentPage = "error";
+    } else if (this.state.currentPage === "singIn") {
+      template = Handlebars.compile(Pages.SingInPage);
+      this.appElement.innerHTML = template();
+    } else if (this.state.currentPage === "message") {
+      template = Handlebars.compile(Pages.MessagesPage);
+      this.appElement.innerHTML = template({
+        contacts,
+        dialog,
+      });
+    } else if (this.state.currentPage === "profile") {
+      template = Handlebars.compile(Pages.ProfilePage);
+      this.appElement.innerHTML = template(profileData);
+    } else if (this.state.currentPage === "profileEdit") {
+      template = Handlebars.compile(Pages.ProfileEditPage);
+      this.appElement.innerHTML = template(profileData);
+    } else if (this.state.currentPage === "passwordEdit") {
+      template = Handlebars.compile(Pages.PasswordEditPage);
+      this.appElement.innerHTML = template();
+    } else if (this.state.currentPage === "avatarEdit") {
+      template = Handlebars.compile(Pages.AvatarEditPage);
+      this.appElement.innerHTML = template();
+    } else {
+      template = Handlebars.compile(Pages.NotFoundPage);
+      this.appElement.innerHTML = template();
     }
     this.attachEventListeners();
   }

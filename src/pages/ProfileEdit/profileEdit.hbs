@@ -1,6 +1,6 @@
 <div class="app">
-  <main class="profile-container">
-    <header class="profile-header">
+  <div class="profile-container">
+    <header>
     <div class="contact-avatar"></div>
     <h2>Имя</h2>
     </header>
@@ -11,8 +11,8 @@
       {{> FieldEditProfile fieldName="Фамилия" fieldValue=second_name}}
       {{> FieldEditProfile fieldName="Телефон" fieldValue=phone}}
   </main>
-  <footer class="profile-footer">
+  <footer>
     {{> Button id="save-profile" text="Сохранить"}}
   </footer>
-  </main>
+  </div>
 </div>
