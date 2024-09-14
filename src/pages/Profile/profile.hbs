@@ -1,0 +1,20 @@
+<div class="app">
+  <main class="profile-container">
+    <header class="profile-header">
+    <div id="profile-avatar" class="contact-avatar"></div>
+    <h2>Имя</h2>
+    </header>
+    <main>
+      {{> FieldProfile fieldName="Почта" fieldValue=email}}
+      {{> FieldProfile fieldName="Логин" fieldValue=login}}
+      {{> FieldProfile fieldName="Имя" fieldValue=first_name}}
+      {{> FieldProfile fieldName="Фамилия" fieldValue=second_name}}
+      {{> FieldProfile fieldName="Телефон" fieldValue=phone}}
+  </main>
+  <footer class="profile-footer">
+    {{> Button id="edit-data" text="Изменить данные"}}
+    {{> Button id="edit-password" text="Изменить пароль"}}
+    {{> Button id="exit" text="Выйти"}}
+  </footer>
+  </main>
+</div>

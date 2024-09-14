@@ -1,0 +1,40 @@
+<div class="app">
+  <div class="messages-container">
+    <sidebar class="contact-list">
+      <div class="contact-list-header">
+        <div class="logo-container">
+          {{> Logo src="src/assets/red-star.svg"}}
+          <p>RED STAR</p>
+        </div>
+        {{> Logo id="logo-setting" src="src/assets/cogwheel.svg"}}
+      </div>
+      <hr />
+      {{#if contacts.length}}
+      {{#each contacts}}
+       {{> Contact text = this.text}}
+       <hr />
+      {{/each}}
+    {{/if}}
+    </sidebar>
+    <main class="messages-list">
+      <div class="messages-list-header">
+        <div class="contact-avatar"></div>
+        <p>Имя</p>
+      </div>
+      <hr />
+      <div class="messages-list-dialog">
+        {{#if dialog.length}}
+          {{#each dialog}}
+            {{> Dialog text = this.text isYou = this.isYou}}
+          {{/each}}
+        {{/if}}
+      </div>
+      <hr />
+      <div class="messages-list-footer">
+        {{> Input id="message" type="text" placeholder="Сообщение"}}
+        {{> Button id="send-mail-button" text="Отправить"}}
+      </div>
+    </main>
+
+  </div>
+</div>

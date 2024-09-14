@@ -1,0 +1,18 @@
+<div class="app">
+  <main class="profile-container">
+    <header class="profile-header">
+    <div class="contact-avatar"></div>
+    <h2>Имя</h2>
+    </header>
+    <main>
+      {{> FieldEditProfile fieldName="Почта" fieldValue=email}}
+      {{> FieldEditProfile fieldName="Логин" fieldValue=login}}
+      {{> FieldEditProfile fieldName="Имя" fieldValue=first_name}}
+      {{> FieldEditProfile fieldName="Фамилия" fieldValue=second_name}}
+      {{> FieldEditProfile fieldName="Телефон" fieldValue=phone}}
+  </main>
+  <footer class="profile-footer">
+    {{> Button id="save-profile" text="Сохранить"}}
+  </footer>
+  </main>
+</div>
