@@ -1,6 +1,8 @@
 import Handlebars from "handlebars";
 import * as Pages from "./pages";
 import { contacts, dialog, profileData } from "./mockData.js";
+import star from "./assets/red-star.svg";
+import cogwheel from "./assets/cogwheel.svg";
 
 import Input from "./components/Input.js";
 import Button from "./components/Button.js";
@@ -39,6 +41,8 @@ export default class App {
       this.appElement.innerHTML = template({
         contacts,
         dialog,
+        star,
+        cogwheel
       });
     } else if (this.state.currentPage === "profile") {
       template = Handlebars.compile(Pages.ProfilePage);
