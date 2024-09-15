@@ -4,12 +4,12 @@
       <h1>Регистрация</h1>
     </header>
     <main>
-      {{> Input id="email" type="text" placeholder="Почта"}}
-      {{> Input id="login" type="text" placeholder="Логин"}}
-      {{> Input id="first_name" type="text" placeholder="Имя"}}
-      {{> Input id="second_name" type="text" placeholder="Фамилия"}}
-      {{> Input id="phone" type="tel" placeholder="Телефон"}}
-      {{> Input id="password" type="password" placeholder="Пароль"}}
+      {{> Input id="email" name="email" type="text" placeholder="Почта"}}
+      {{> Input id="login" name="login" type="text" placeholder="Логин"}}
+      {{> Input id="first_name" name="first_name" type="text" placeholder="Имя"}}
+      {{> Input id="second_name" name="second_name" type="text" placeholder="Фамилия"}}
+      {{> Input id="phone" name="phone" type="tel" placeholder="Телефон"}}
+      {{> Input id="password" name="password" type="password" placeholder="Пароль"}}
     </main>
     <footer>
       {{> Button id="register-button" text="Зарегистрироваться"}}

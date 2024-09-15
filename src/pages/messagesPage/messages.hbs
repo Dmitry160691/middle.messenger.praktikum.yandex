@@ -3,10 +3,10 @@
     <sidebar class="contact-list">
       <div class="contact-list-header">
         <div class="logo-container">
-          {{> Logo src="src/assets/red-star.svg"}}
+          {{> Logo src="./src/assets/red-star.svg" alt="Звезда"}}
           <p>RED STAR</p>
         </div>
-        {{> Logo id="logo-setting" src="src/assets/cogwheel.svg"}}
+        {{> Logo id="logo-setting" src="./src/assets/cogwheel.svg" alt="Шестеренка"}}
       </div>
       <hr />
       {{#if contacts.length}}
@@ -31,7 +31,7 @@
       </div>
       <hr />
       <div class="messages-list-footer">
-        {{> Input id="message" type="text" placeholder="Сообщение"}}
+        {{> Input id="message" name="message" type="text" placeholder="Сообщение"}}
         {{> Button id="send-mail-button" text="Отправить"}}
       </div>
     </main>

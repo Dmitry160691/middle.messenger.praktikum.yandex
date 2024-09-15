@@ -5,7 +5,7 @@
 
 ## Дизайн
 
-За основу взят предоставленный макет но в процессе изменят под себя.
+За основу взят предоставленный макет, но в процессе изменяю его под себя.
 https://www.figma.com/design/jF5fFFzgGOxQeB4CmKWTiE/Chat_external_link?node-id=0-1&node-type=canvas&t=PdTiN3Ce0bYX7POi-0
 
 ## Установка
@@ -20,4 +20,4 @@ https://www.figma.com/design/jF5fFFzgGOxQeB4CmKWTiE/Chat_external_link?node-id=0
 
 ### На веб-приложение:
 
-Netlify: https://main--deluxe-paletas-0451a0.netlify.app/
+Netlify: https://deploy-preview-2--deluxe-paletas-0451a0.netlify.app/

@@ -5,11 +5,11 @@
     <h2>Имя</h2>
     </header>
     <main>
-      {{> FieldEditProfile fieldName="Почта" fieldValue=email}}
-      {{> FieldEditProfile fieldName="Логин" fieldValue=login}}
-      {{> FieldEditProfile fieldName="Имя" fieldValue=first_name}}
-      {{> FieldEditProfile fieldName="Фамилия" fieldValue=second_name}}
-      {{> FieldEditProfile fieldName="Телефон" fieldValue=phone}}
+      {{> FieldEditProfile fieldName="Почта" fieldValue=email name="email"}}
+      {{> FieldEditProfile fieldName="Логин" fieldValue=login name="login"}}
+      {{> FieldEditProfile fieldName="Имя" fieldValue=first_name name="first_name"}}
+      {{> FieldEditProfile fieldName="Фамилия" fieldValue=second_name name="second_name"}}
+      {{> FieldEditProfile fieldName="Телефон" fieldValue=phone name="phone"}}
   </main>
   <footer>
     {{> Button id="save-profile" text="Сохранить"}}
