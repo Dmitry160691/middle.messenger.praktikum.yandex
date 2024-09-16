@@ -1,0 +1,39 @@
+<div class="app">
+  <div class="messages-container">
+    <sidebar class="contact-list">
+      <div class="contact-list-header">
+        <div class="logo-container">
+          {{> Logo src=star alt="Звезда"}}
+          <p>RED STAR</p>
+        </div>
+        {{> Logo id="logo-setting" src=cogwheel alt="Шестеренка"}}
+      </div>
+      <hr />
+      {{#if contacts.length}}
+      {{#each contacts}}
+       {{> Contact text = this.text}}
+       <hr />
+      {{/each}}
+    {{/if}}
+    </sidebar>
+    <main class="messages-list">
+      <div class="messages-list-header">
+        <div class="contact-avatar"></div>
+        <p>Имя</p>
+      </div>
+      <hr />
+      <div class="messages-list-dialog">
+        {{#if dialog.length}}
+          {{#each dialog}}
+            {{> Dialog text = this.text isYou = this.isYou}}
+          {{/each}}
+        {{/if}}
+      </div>
+      <hr />
+      <div class="messages-list-footer">
+        {{> Input id="message" name="message" type="text" placeholder="Сообщение"}}
+        {{> Button id="send-mail-button" text="Отправить"}}
+      </div>
+    </main>
+  </div>
+</div>

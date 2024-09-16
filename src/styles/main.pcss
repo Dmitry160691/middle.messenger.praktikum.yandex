@@ -1,0 +1,227 @@
+:root {
+  --primary-color: #0b93f6;
+  --secondary-color: #e5e5ea;
+  --background-color: black;
+  --page-background: white;
+  --text-color: #black;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+hr {
+  width: 95%;
+  margin: auto;
+  border: none;
+  height: 1px;
+  background: var(--secondary-color);
+}
+body {
+  font-family: Arial, sans-serif;
+  background-color: var(--background-color);
+  line-height: 24px;
+}
+
+header {
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px 20px;
+  gap: 10px;
+}
+
+footer {
+  margin: 20px auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.app {
+  color: var(--text-color);
+  padding: 10px;
+  margin: auto;
+  width: 80vw;
+  height: 100vh;
+}
+
+h1,
+h2,
+h3 {
+  color: var(--secondary-color);
+}
+
+.input,
+.button {
+  margin: 10px 0;
+  padding: 10px;
+  border-radius: 10px;
+  box-sizing: border-box;
+}
+
+.input {
+  width: 100%;
+  border: 1px solid #bdbdbd;
+
+  &:focus {
+    border-color: #bdbdbd;
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgba(158, 158, 158, 0.25);
+  }
+}
+
+.button {
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  width: 150px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: color-mix(in srgb, var(--primary-color) 80%, black);
+  }
+
+  &:disabled {
+    background-color: #bdc3c7;
+    cursor: not-allowed;
+  }
+}
+
+.auth-container,
+.sign-in-container,
+.profile-container {
+  background-color: var(--page-background);
+  border-radius: 10px;
+  width: 400px;
+  margin: auto;
+  padding: 20px 40px;
+}
+
+.profile-container {
+  width: 800px;
+}
+
+.contact-list-header {
+  height: 60px;
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo-container {
+  display: flex;
+  gap: 5px;
+}
+
+.logo {
+  width: 20px;
+  height: 20px;
+}
+
+.logo img {
+  max-width: 100%;
+  max-height: 100%;
+  cursor: pointer;
+}
+
+.messages-container {
+  display: flex;
+  gap: 10px;
+  height: 100%;
+}
+
+.contact-list,
+.messages-list {
+  background-color: var(--page-background);
+  min-width: 400px;
+  border-radius: 10px;
+  padding: 10px;
+  overflow: auto;
+}
+
+.messages-list {
+  flex-grow: 1;
+  position: relative;
+  display: block;
+}
+
+.contact-container {
+  height: 80px;
+  display: flex;
+  padding: 10px 0;
+  gap: 10px;
+}
+
+.contact-avatar {
+  height: 60px;
+  width: 60px;
+  border-radius: 50%;
+  background: var(--secondary-color);
+}
+
+.contact-header {
+  display: flex;
+  margin-bottom: 10px;
+  justify-content: space-between;
+}
+
+.contact-text {
+  display: flex;
+}
+
+.contact {
+  flex-grow: 1;
+}
+
+.messages-list-dialog {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+}
+
+.send,
+.receive {
+  max-width: 50%;
+  position: relative;
+  padding: 10px 20px;
+  border-radius: 10px;
+}
+
+.send {
+  color: white;
+  background: var(--primary-color);
+  align-self: flex-end;
+}
+
+.receive {
+  background: var(--secondary-color);
+  color: var(--text-color);
+  align-self: flex-start;
+}
+
+.messages-list-footer {
+  display: flex;
+  gap: 10px;
+  position: absolute;
+  bottom: 0;
+  width: 97%;
+}
+
+.messages-list-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.field-edit,
+.field-profile {
+  padding: 10px 20px;
+  display: flex;
+  justify-content: space-between;
+}
