@@ -92,7 +92,7 @@ export default class Block {
       this._updateChildProps(newProps);
       this._updateListProps(newProps);
 
-    this._render();
+      this._render();
     }
   }
 

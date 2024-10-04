@@ -5,14 +5,14 @@ export function areObjectsEqual<T>(x: T, y: T): boolean {
     return x === y;
   }
   
-  const xKeys = Object.keys(x) as string[];
-  const yKeys = Object.keys(y) as string[];
+  const xKeys = Object.keys(x);
+  const yKeys = Object.keys(y);
   
   if (xKeys.length !== yKeys.length) {
     return false;
   }
   
-  for (let key of xKeys) {
+  for (const key of xKeys) {
     if (!areObjectsEqual(x[key], y[key])) {
       return false;
     }

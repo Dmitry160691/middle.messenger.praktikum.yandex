@@ -98,7 +98,7 @@ export const contacts: Dialog [] = [
     name: 'Дима0',
     dialog: [
     ],
-  }
+  },
 ];
 
 export const profileData = {

@@ -27,7 +27,7 @@ export class MessagesPage extends Block {
         text: 'Отправить',
         onClick: () => {
           console.log({ message: this.props.message });
-          this.addMessage(this.props.message);
+          // this.addMessage(this.props.message);
         },
         
       }),
@@ -66,12 +66,12 @@ export class MessagesPage extends Block {
     });
   }
 
-  addMessage(value: string): void {
-    // let di = (this.lists.Dialog as Array<Dialog>).concat(
-    //   new Dialog({text: value, isYou: true})
-    // );
-    // this.setLists({ Dialog: di });
-  }
+  // addMessage(value: string): void {
+  // let di = (this.lists.Dialog as Array<Dialog>).concat(
+  //   new Dialog({text: value, isYou: true})
+  // );
+  // this.setLists({ Dialog: di });
+  // }
 
   lastMessage(arr: any[]): any {
     if (arr.length) {

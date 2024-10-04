@@ -13,7 +13,7 @@ export class Contact extends Block {
       ...props,
       events: {
         click: () => {
-          props.onClick && props.onClick();
+          props.onClick();
         },
       },
     });
