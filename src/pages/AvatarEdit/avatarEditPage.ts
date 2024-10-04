@@ -12,18 +12,25 @@ export class AvatarEditPage extends Block {
         name: 'avatar',
         type: 'file',
         placeholder:'Аватар',
-        // onClick: (event: Event) => {
-        //   console.log('CLICK');
-        //   event.preventDefault();
-        //   event.stopPropagation();
-        // },
+        onBlur: (e) => {
+          if (e.target instanceof HTMLInputElement) {
+            const avatar = { avatar: e.target.value };
+            this.setProps({
+              ...avatar,
+            });
+          }
+        },
       }),
       ButtonSave:  new Button({
         id: 'save-avatar',
         text: 'Поменять',
-        // onClick: () => {
-        //   nav('singIn');
-        // },
+        onClick: () => {
+          console.log(
+            {
+              avatar: this.props.avatar,
+            },
+          );
+        },
       }),
     });
   }

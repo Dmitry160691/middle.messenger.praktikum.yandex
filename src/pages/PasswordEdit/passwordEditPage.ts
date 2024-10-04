@@ -12,22 +12,35 @@ export class PasswordEditPage extends Block {
         name: 'oldPassword',
         type: 'password',
         placeholder:'Старый пароль',
-        // onClick: (event: Event) => {
-        // },
+        onBlur: (e) => {
+          if (e.target instanceof HTMLInputElement) {
+            const oldPassword = { oldPassword: e.target.value };
+            this.setProps({
+              ...oldPassword,
+            });
+          }
+        },
       }),
       InputNewPass: new Input({
         id: 'newPassword',
         name: 'newPassword',
         type: 'password',
         placeholder:'Новый пароль',
-        // onClick: () => {
-        // },
+        onBlur: (e) => {
+          if (e.target instanceof HTMLInputElement) {
+            const newPassword = { newPassword: e.target.value };
+            this.setProps({
+              ...newPassword,
+            });
+          }
+        },
       }),
       ButtonSave:  new Button({
         id: 'save-password',
         text: 'Сохранить',
-        // onClick: () => {
-        // },
+        onClick: () => {
+          console.log({'oldPassword': this.props.oldPassword, 'newPassword': this.props.newPassword})
+        },
       }),
     });
   }

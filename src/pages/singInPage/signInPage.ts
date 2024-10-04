@@ -10,58 +10,98 @@ export class SignInPage extends Block {
         name: 'email',
         type: 'text',
         placeholder:'Почта',
-        // onClick: () => {
-        //   console.log('email');
-        // },
+        onBlur: (e) => {
+          if (e.target instanceof HTMLInputElement) {
+            const email = { email: e.target.value };
+            this.setProps({
+              ...email,
+            });
+          }
+        },
       }),
       InputLogin: new Input({
         id: 'login',
         name: 'login',
         type: 'text',
         placeholder:'Логин',
-        // onClick: () => {
-        //   console.log('login');
-        // },
+        onBlur: (e) => {
+          if (e.target instanceof HTMLInputElement) {
+            const login = { login: e.target.value };
+            this.setProps({
+              ...login,
+            });
+          }
+        },
       }),
       InputFirstName: new Input({
         id: 'first_name',
         name: 'first_name',
         type: 'text',
         placeholder:'Имя',
-        // onClick: () => {
-        //   console.log('first_name');
-        // },
+        onBlur: (e) => {
+          if (e.target instanceof HTMLInputElement) {
+            const first_name = { first_name: e.target.value };
+            this.setProps({
+              ...first_name,
+            });
+          }
+        },
       }),
       InputSecondName: new Input({
         id: 'second_name',
         name: 'second_name',
         type: 'text',
         placeholder:'Фамилия',
-        // onClick: () => {
-        //   console.log('second_name');
-        // },
+        onBlur: (e) => {
+          if (e.target instanceof HTMLInputElement) {
+            const second_name = { second_name: e.target.value };
+            this.setProps({
+              ...second_name,
+            });
+          }
+        },
       }),
       InputPhone: new Input({
         id: 'phone',
         name: 'phone',
         type: 'tel',
         placeholder:'Телефон',
-        // onClick: () => {
-        //   console.log('CLICK');
-        // },
+        onBlur: (e) => {
+          if (e.target instanceof HTMLInputElement) {
+            const phone = { phone: e.target.value };
+            this.setProps({
+              ...phone,
+            });
+          }
+        },
       }),
       InputPass: new Input({
         id: 'password',
         name: 'password',
         type: 'password',
         placeholder:'Пароль',
-        // onClick: () => {
-        //   console.log('CLICK');
-        // },
+        onBlur: (e) => {
+          if (e.target instanceof HTMLInputElement) {
+            const password = { password: e.target.value };
+            this.setProps({
+              ...password,
+            });
+          }
+        },
       }),
       ButtonRegister:  new Button({
         id: 'register-button',
         text: 'Зарегистрироваться',
+        onClick: () => {
+          console.log({
+            'email': this.props.email,
+            'login': this.props.login,
+            'first_name': this.props.first_name,
+            'second_name': this.props.second_name,
+            'phone': this.props.phone,
+            'password': this.props.password
+          })
+        },
       }),
       ButtonEnter:  new Button({
         id: 'enter-button',
@@ -71,7 +111,6 @@ export class SignInPage extends Block {
   }
 
   render() {
-    console.log('dcsds');
     return `
     <div class="app">
   <div class="sign-in-container">

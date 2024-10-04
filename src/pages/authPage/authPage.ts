@@ -19,7 +19,6 @@ export class AuthPage extends Block {
               ...login,
             });
           }
-          return '';
         },
       }),
       InputPass: new Input({
@@ -34,7 +33,6 @@ export class AuthPage extends Block {
               ...password,
             });
           }
-          return '';
         },
       }),
       ButtonAuth:  new Button({
