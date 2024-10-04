@@ -12,10 +12,14 @@ export class AuthPage extends Block {
         name: 'login',
         type: 'text',
         placeholder:'Логин',
-        onClick: (event: Event) => {
-          console.log('CLICK');
-          event.preventDefault();
-          event.stopPropagation();
+        onBlur: (e) => {
+          if (e.target instanceof HTMLInputElement) {
+            const login = { login: e.target.value };
+            this.setProps({
+              ...login,
+            });
+          }
+          return '';
         },
       }),
       InputPass: new Input({
@@ -23,23 +27,31 @@ export class AuthPage extends Block {
         name: 'password',
         type: 'password',
         placeholder:'Пароль',
-        onClick: () => {
-          console.log('CLICK');
+        onBlur: (e) => {
+          if (e.target instanceof HTMLInputElement) {
+            const password = { password: e.target.value };
+            this.setProps({
+              ...password,
+            });
+          }
+          return '';
         },
       }),
       ButtonAuth:  new Button({
         id: 'auth-button',
         text: 'Войти',
-        // onClick: () => {
-        //   nav('message');
-        // },
+        onClick: () => {
+          console.log(
+            {
+              login: this.props.login,
+              password: this.props.password,
+            },
+          );
+        },
       }),
       ButtonSingIn:  new Button({
         id: 'sign-in-button',
         text: 'Нет акаунта?',
-        // onClick: () => {
-        //   nav('singIn');
-        // },
       }),
     });
   }

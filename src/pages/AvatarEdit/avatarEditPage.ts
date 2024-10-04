@@ -12,11 +12,11 @@ export class AvatarEditPage extends Block {
         name: 'avatar',
         type: 'file',
         placeholder:'Аватар',
-        onClick: (event: Event) => {
-          console.log('CLICK');
-          event.preventDefault();
-          event.stopPropagation();
-        },
+        // onClick: (event: Event) => {
+        //   console.log('CLICK');
+        //   event.preventDefault();
+        //   event.stopPropagation();
+        // },
       }),
       ButtonSave:  new Button({
         id: 'save-avatar',

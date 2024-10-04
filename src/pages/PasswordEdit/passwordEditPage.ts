@@ -12,26 +12,21 @@ export class PasswordEditPage extends Block {
         name: 'oldPassword',
         type: 'password',
         placeholder:'Старый пароль',
-        onClick: (event: Event) => {
-          console.log('CLICK');
-          event.preventDefault();
-          event.stopPropagation();
-        },
+        // onClick: (event: Event) => {
+        // },
       }),
       InputNewPass: new Input({
         id: 'newPassword',
         name: 'newPassword',
         type: 'password',
         placeholder:'Новый пароль',
-        onClick: () => {
-          console.log('CLICK');
-        },
+        // onClick: () => {
+        // },
       }),
       ButtonSave:  new Button({
         id: 'save-password',
         text: 'Сохранить',
         // onClick: () => {
-        //   nav('singIn');
         // },
       }),
     });

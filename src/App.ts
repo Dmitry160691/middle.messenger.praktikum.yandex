@@ -1,7 +1,7 @@
 import { AuthPage } from './pages/authPage/authPage';
 import { MessagesPage } from './pages/messagesPage/messagesPage';
 import { SignInPage } from './pages/singInPage/signInPage';
-import { contacts, dialog, profileData } from './mockData.js';
+import { contacts, profileData } from './mockData.js';
 import { ProfilePage } from './pages/Profile/profilePage';
 import { ProfileEditPage } from './pages/ProfileEdit/profileEditPage';
 import { AvatarEditPage } from './pages/AvatarEdit/avatarEditPage';
@@ -12,6 +12,8 @@ import { NotFoundPage } from './pages/notFoundPage/notFoundPage';
 
 interface AppState {
   currentPage: string;
+  userState;
+  dialogState;
 }
 
 export default class App {
@@ -22,6 +24,13 @@ export default class App {
   constructor() {
     this.state = {
       currentPage: 'auth',
+      userState: {
+        profileData,
+      },
+      dialogState: {
+        contacts,
+      },
+
     };
     this.appElement = document.getElementById('app');
   }
@@ -44,7 +53,6 @@ export default class App {
     } else if (this.state.currentPage === 'message') {
       const messagesPage = new MessagesPage({
         contacts,
-        dialog,
       });
       const template = messagesPage.getContent();
       if (this.appElement && template) {
@@ -52,7 +60,7 @@ export default class App {
       }
     } else if (this.state.currentPage === 'profile') {
       const profilePage = new ProfilePage({
-        profileData,
+        profileData: this.state.userState,
       });
       const template = profilePage.getContent();
       if (this.appElement && template) {
@@ -60,7 +68,7 @@ export default class App {
       }
     } else if (this.state.currentPage === 'profileEdit') {
       const profileEditPage = new ProfileEditPage({
-        profileData,
+        profileData: this.state.userState,
       });
       const template = profileEditPage.getContent();
       if (this.appElement && template) {
@@ -86,33 +94,6 @@ export default class App {
         this.state.currentPage = 'notFound';
       }
     }
-    // else if (this.state.currentPage === "singIn") {
-    //   template = Handlebars.compile(Pages.SingInPage);
-    //   this.appElement.innerHTML = template();
-    // } else if (this.state.currentPage === "message") {
-    //   template = Handlebars.compile(Pages.MessagesPage);
-    //   this.appElement.innerHTML = template({
-    //     contacts,
-    //     dialog,
-    //     star,
-    //     cogwheel
-    //   });
-    // } else if (this.state.currentPage === "profile") {
-    //   template = Handlebars.compile(Pages.ProfilePage);
-    //   this.appElement.innerHTML = template(profileData);
-    // } else if (this.state.currentPage === "profileEdit") {
-    //   template = Handlebars.compile(Pages.ProfileEditPage);
-    //   this.appElement.innerHTML = template(profileData);
-    // } else if (this.state.currentPage === "passwordEdit") {
-    //   template = Handlebars.compile(Pages.PasswordEditPage);
-    //   this.appElement.innerHTML = template();
-    // } else if (this.state.currentPage === "avatarEdit") {
-    //   template = Handlebars.compile(Pages.AvatarEditPage);
-    //   this.appElement.innerHTML = template();
-    // } else {
-    //   template = Handlebars.compile(Pages.NotFoundPage);
-    //   this.appElement.innerHTML = template();
-    // }
     this.attachEventListeners();
   }
 

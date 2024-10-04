@@ -5,7 +5,8 @@ interface InputProps {
   name: string;
   type: string;
   placeholder: string;
-  onClick?: (e: Event) => void;
+  value?: string;
+  onBlur?: (e: Event) => void;
 }
 
 export class Input extends Block {
@@ -13,7 +14,14 @@ export class Input extends Block {
     super({
       ...props,
       events: {
-        click: (e: Event) => props.onClick && props.onClick(e),
+        blur: (e: Event) => {
+          if (props.onBlur) {
+            props.onBlur(e);
+          }
+          if (e.target instanceof HTMLInputElement) {
+            this.setProps({ value: e.target.value });
+          }
+        },
       },
     });
   }

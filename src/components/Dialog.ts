@@ -1,13 +1,8 @@
 import Block from '../framework/Block';
 
-interface DialogProps {
-  text: string;
-  isYou: boolean;
-}
-
 export class Dialog extends Block {
-  constructor(props: DialogProps) {
-    super({ ...props });
+  constructor() {
+    super();
   }
 
   render(): string {

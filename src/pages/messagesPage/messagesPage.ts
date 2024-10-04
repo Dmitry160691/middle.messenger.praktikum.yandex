@@ -7,11 +7,11 @@ import Block from '../../framework/Block';
 
 interface PageProps {
   contacts: any,
-  dialog?: any,
+  selectContact?: any,
 }
 
 export class MessagesPage extends Block {
-  constructor(props: PageProps) {
+  constructor({ contacts, selectContact }: PageProps) {
     super({
       LogoStar:  new Logo({
         src: 'star',
@@ -21,48 +21,63 @@ export class MessagesPage extends Block {
         id: 'logo-setting',
         src: 'cogwheel',
         alt: 'Шестеренка',
+      }),
+      ButtonSend:  new Button({
+        id: 'send-mail-button',
+        text: 'Отправить',
         onClick: () => {
-          console.log('nav -> profile');
+          console.log({ message: this.props.message });
+          this.addMessage(this.props.message);
         },
+        
       }),
       InputMessage: new Input({
         id: 'message',
         name: 'message',
         type: 'text',
         placeholder:'Сообщение',
-        onClick: () => {
-          console.log('message');
+        onBlur: (e) => {
+          if (e.target instanceof HTMLInputElement) {
+            const message = { message: e.target.value };
+            this.setProps({
+              ...message,
+            });
+          }
+          return '';
         },
       }),
-      ButtonSend:  new Button({
-        id: 'send-mail-button',
-        text: 'Отправить',
-        onClick: () => {
-          console.log('puff', props.contacts);
+      Contacts: contacts.map(
+        (item) => {
+          return new Contact({
+            name: item.name,
+            lastDialog: item.dialog[item.dialog.length - 1 ],
+            selectContact: selectContact,
+            onClick: () => {
+              this.setProps({
+                selectContact: item,
+              });
+              console.log(this.props.selectContact);
+            },
+          });
         },
-      }),
-      Contacts: props.contacts.map(
-        (i) =>
-          new Contact({
-            name: i.name,
-            time: i.time,
-            you: i.you,
-            text: i.text,
-          }),
       ),
-      Dialog: props.dialog.map(
-        (item) =>
-          new Dialog({
-            text: item.text,
-            isYou: item.isYou,
-            // onClick: () => {
-            //   this.setProps({
-            //     selectedChat: currentChat,
-            //   });
-            // },
-          }),
-      ),
+      // Dialog:  new Dialog({text:'Добрый день! Я в своем познании настолько преисполнился, что я как будто бы уже сто триллионов миллиардов лет проживаю на триллионах и триллионах таких же планет, как эта Земля, мне этот мир абсолютно понятен, и я здесь ищу только одного - покоя, умиротворения и вот этой гармонии, от слияния с бесконечно вечным...', isYou: true})
+      Dialog:  new Dialog(),
     });
+  }
+
+  addMessage(value: string): void {
+    // let di = (this.lists.Dialog as Array<Dialog>).concat(
+    //   new Dialog({text: value, isYou: true})
+    // );
+    // this.setLists({ Dialog: di });
+  }
+
+  lastMessage(arr: any[]): any {
+    if (arr.length) {
+      return arr[arr.length - 1];
+    }
+    return [];
   }
 
   render() {
