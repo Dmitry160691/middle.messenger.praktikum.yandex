@@ -1,10 +1,14 @@
 {
   "compilerOptions": {
+    "noImplicitAny": true,
+    "strictNullChecks": true,
+    "sourceMap": true,
     "target": "ES2020",
     "useDefineForClassFields": true,
     "module": "ESNext",
     "lib": ["ES2020", "DOM", "DOM.Iterable"],
     "skipLibCheck": true,
+    "baseUrl": ".",
     "moduleResolution": "bundler",
     "allowImportingTsExtensions": true,
     "resolveJsonModule": true,
@@ -13,10 +17,7 @@
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "noFallthroughCasesInSwitch": true,
-    "noImplicitAny": true,
-    "sourceMap": true,
-    "strictNullChecks": true
+    "noFallthroughCasesInSwitch": true
   },
-  "include": ["src/**/*.ts", ".eslintrc.cjs"]
+  "include": ["src/**/*.ts", "src/**/*.js"]
 }
