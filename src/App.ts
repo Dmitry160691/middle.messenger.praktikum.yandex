@@ -1,12 +1,12 @@
 import { contacts, profileData } from "./mockData";
-import { AuthPage } from "./pages/AuthPage/authPage";
+import { AuthPage } from "./pages/authPage/authPage";
 import { AvatarEditPage } from "./pages/AvatarEdit/avatarEditPage";
-import { MessagesPage } from "./pages/MessagesPage/messagesPage";
-import { NotFoundPage } from "./pages/NotFoundPage/notFoundPage";
+import { MessagesPage } from "./pages/messagesPage/messagesPage";
+import { NotFoundPage } from "./pages/notFoundPage/notFoundPage";
 import { PasswordEditPage } from "./pages/PasswordEdit/passwordEditPage";
 import { ProfilePage } from "./pages/Profile/profilePage";
 import { ProfileEditPage } from "./pages/ProfileEdit/profileEditPage";
-import { SignInPage } from "./pages/SingInPage/signInPage";
+import { SignInPage } from "./pages/singInPage/signInPage";
 import { DialogData, ProfileData } from "./types";
 
 interface AppState {
