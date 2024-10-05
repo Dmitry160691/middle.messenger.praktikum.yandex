@@ -1,13 +1,14 @@
-import { Button } from '../../components/Button';
+import { ButtonSecond } from '../../components/ButtonSecond';
 import { FieldProfile } from '../../components/FieldProfile';
 import Block from '../../framework/Block';
 
 interface PageProps {
-  profileData: any
+  profileData: any,
+  link?: (path: string) => void;
 }
 
 export class ProfilePage extends Block {
-  constructor({ profileData }: PageProps) {
+  constructor({ profileData, link }: PageProps) {
     super({
       FieldProfileEmail: new FieldProfile({
         fieldName: 'Почта',
@@ -30,17 +31,26 @@ export class ProfilePage extends Block {
         fieldValue: profileData.phone,
       }),
       
-      ButtonEditData:  new Button({
+      ButtonEditData:  new ButtonSecond({
         id: 'edit-data',
         text: 'Изменить данные',
+        onClick: () => {
+          link('profileEdit');
+        },
       }),
-      ButtonEditPass:  new Button({
+      ButtonEditPass:  new ButtonSecond({
         id: 'edit-password',
         text: 'Изменить пароль',
+        onClick: () => {
+          link('passwordEdit');
+        },
       }),
-      ButtonExit:  new Button({
+      ButtonExit:  new ButtonSecond({
         id: 'exit',
         text: 'Выйти',
+        onClick: () => {
+          link('auth');
+        },
       }),
     });
   }

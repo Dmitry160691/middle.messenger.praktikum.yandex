@@ -19,7 +19,7 @@ export class InputContainer extends Block {
         onBlur: (e: Event) => {
           if (props.onBlur) {
             const error = props.onBlur(e);
-            const message = !!error ? error : undefined
+            const message = !!error ? error : undefined;
             this.setProps({
               message: message,
             });

@@ -1,6 +1,7 @@
 import EventBus, { EventCallback } from './EventBus';
 import Handlebars from 'handlebars';
 import { v4 as uuidv4 } from 'uuid';
+import { areObjectsEqual } from '../utils/areObjectsEqual';
 
 interface BlockProps {
   [key: string]: any;
@@ -46,6 +47,15 @@ export default class Block {
     });
   }
 
+  private _removeEvents(): void {
+    const { events = {} } = this.props;
+    Object.keys(events).forEach(eventName => {
+      if (this._element) {
+        this._element.removeEventListener(eventName, events[eventName]);
+      }
+    });
+  }
+
   private _registerEvents(eventBus: EventBus): void {
     eventBus.on(Block.EVENTS.INIT, this.init.bind(this) as EventCallback);
     eventBus.on(Block.EVENTS.FLOW_CDM, this._componentDidMount.bind(this) as EventCallback);
@@ -59,7 +69,7 @@ export default class Block {
 
   private _componentDidMount(): void {
     this.componentDidMount();
-    Object.values(this.children).forEach(child => {child.dispatchComponentDidMount();});
+    Object.values(this.children).forEach(child => {child.dispatchComponentDidMount()});
   }
 
   protected componentDidMount(): void {}
@@ -73,10 +83,12 @@ export default class Block {
     if (!response) {
       return;
     }
-    this._render();
+    if (!areObjectsEqual(oldProps, newProps)) {
+      this.updateChildrenProps(newProps);
+      this._render();
+    }
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   protected componentDidUpdate(_oldProps: BlockProps, _newProps: BlockProps): boolean {
     return true;
   }
@@ -143,7 +155,6 @@ export default class Block {
   }
 
   private _render(): void {
-    console.log('Render');
     const propsAndStubs = { ...this.props };
     const tmpId = uuidv4();
     Object.entries(this.children).forEach(([key, child]) => {
@@ -184,6 +195,7 @@ export default class Block {
       this._element.replaceWith(newElement);
     }
     this._element = newElement;
+    this._removeEvents();
     this._addEvents();
     this.addAttributes();
   }
@@ -236,5 +248,15 @@ export default class Block {
     if (content) {
       content.style.display = 'none';
     }
+  }
+
+  private updateChildrenProps(props: BlockProps) {
+    Object.values(this.children).forEach((child) => {
+      Object.keys(props).forEach((prop) => {
+        if (!areObjectsEqual(child.props[prop], props[prop])) {
+          child.setProps({ [prop]: props[prop] });
+        }
+      });
+    });
   }
 }

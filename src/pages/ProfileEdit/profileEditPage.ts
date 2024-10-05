@@ -3,11 +3,12 @@ import { FieldEditProfile } from '../../components/FieldEditProfile';
 import Block from '../../framework/Block';
 
 interface PageProps {
-  profileData: any
+  profileData: any,
+  link?: (path: string) => void;
 }
 
 export class ProfileEditPage extends Block {
-  constructor({ profileData }: PageProps) {
+  constructor({ profileData, link }: PageProps) {
     super({
       FieldEditProfileEmail: new FieldEditProfile({
         fieldName: 'Почта',
@@ -38,6 +39,9 @@ export class ProfileEditPage extends Block {
       ButtonSave:  new Button({
         id: 'save-profile',
         text: 'Сохранить',
+        onClick: () => {
+          link('profile');
+        },
       }),
     });
   }

@@ -4,10 +4,12 @@ import { InputContainer } from '../../components/InputContainer';
 import Block from '../../framework/Block';
 import { validation } from '../../utils/validField';
 
-
+interface PageProps {
+  link?: (path: string) => void;
+}
 
 export class AuthPage extends Block {
-  constructor() {
+  constructor(props: PageProps) {
     super({
       InputLogin: new InputContainer({
         id: 'login',
@@ -17,14 +19,14 @@ export class AuthPage extends Block {
         onBlur: (e) => {
           if (e.target instanceof HTMLInputElement) {
             const login = { login: e.target.value };
-            const message = validation('login', login.login)
+            const messageError = validation('login', login.login);
             this.setProps({
               ...login,
-              // disabled: !!message || !!validation('password', this.props.password)
+              disabled: !!messageError || !!validation('password', this.props.password),
             });
-            return message
+            return messageError;
           }
-          return ''
+          return '';
         },
       }),
       InputPass: new InputContainer({
@@ -35,34 +37,38 @@ export class AuthPage extends Block {
         onBlur: (e) => {
           if (e.target instanceof HTMLInputElement) {
             const password = { password: e.target.value };
-            const messageError = validation('password', password.password)
+            const messageError = validation('password', password.password);
             this.setProps({
               ...password,
-              // disabled: !!messageError || !!validation('login', this.props.login)
+              disabled: !!messageError || !!validation('login', this.props.login),
             });
-            return messageError
+            return messageError;
           }
-          return ''
+          return '';
         },
       }),
       ButtonAuth:  new Button({
         id: 'auth-button',
         text: 'Войти',
-        // disabled: true,
+        disabled: true,
         onClick: () => {
-          if (validation('login', this.props.login) ==='' || validation('password', this.props.password) === ''){
+          if (validation('login', this.props.login) === '' && validation('password', this.props.password) === '') {
             console.log(
               {
                 login: this.props.login,
                 password: this.props.password,
               },
-            )
+            );
+            props.link('message');
           }
         },
       }),
       ButtonSingIn:  new ButtonSecond({
         id: 'sign-in-button',
         text: 'Нет акаунта?',
+        onClick: () => {
+          props.link('singIn');
+        },
       }),
     });
   }

@@ -29,6 +29,6 @@ export class Input extends Block {
   render(): string {
     return `
       <input id="{{id}}" name="{{name}}" type="{{type}}" placeholder="{{placeholder}}" value="{{value}}" class="input">
-      `
+      `;
   }
 }

@@ -1,111 +1,150 @@
-import { Button } from '../../components/Button';
-import { Input } from '../../components/Input';
-import Block from '../../framework/Block';
+import { Button } from "../../components/Button";
+import { ButtonSecond } from "../../components/ButtonSecond";
+import { InputContainer } from "../../components/InputContainer";
+import Block from "../../framework/Block";
+import { validation } from "../../utils/validField";
+
+interface PageProps {
+  link?: (path: string) => void;
+}
 
 export class SignInPage extends Block {
-  constructor() {
+  constructor(props: PageProps) {
     super({
-      InputEmail: new Input({
-        id: 'email',
-        name: 'email',
-        type: 'text',
-        placeholder:'Почта',
+      InputEmail: new InputContainer({
+        id: "email",
+        name: "email",
+        type: "text",
+        placeholder: "Почта",
         onBlur: (e) => {
           if (e.target instanceof HTMLInputElement) {
             const email = { email: e.target.value };
+            const messageError = validation("email", email.email);
             this.setProps({
               ...email,
+              disabled: !!messageError,
             });
+            return messageError;
           }
+          return "";
         },
       }),
-      InputLogin: new Input({
-        id: 'login',
-        name: 'login',
-        type: 'text',
-        placeholder:'Логин',
+      InputLogin: new InputContainer({
+        id: "login",
+        name: "login",
+        type: "text",
+        placeholder: "Логин",
         onBlur: (e) => {
           if (e.target instanceof HTMLInputElement) {
             const login = { login: e.target.value };
+            const messageError = validation("login", login.login);
             this.setProps({
               ...login,
+              disabled: !!messageError,
             });
+            return messageError;
           }
+          return "";
         },
       }),
-      InputFirstName: new Input({
-        id: 'first_name',
-        name: 'first_name',
-        type: 'text',
-        placeholder:'Имя',
+      InputFirstName: new InputContainer({
+        id: "first_name",
+        name: "first_name",
+        type: "text",
+        placeholder: "Имя",
         onBlur: (e) => {
           if (e.target instanceof HTMLInputElement) {
-            const first_name = { first_name: e.target.value };
+            const firstName = { first_name: e.target.value };
+            const messageError = validation("first_name", firstName.first_name);
             this.setProps({
-              ...first_name,
+              ...firstName,
+              disabled: !!messageError,
             });
+            return messageError;
           }
+          return "";
         },
       }),
-      InputSecondName: new Input({
-        id: 'second_name',
-        name: 'second_name',
-        type: 'text',
-        placeholder:'Фамилия',
+      InputSecondName: new InputContainer({
+        id: "second_name",
+        name: "second_name",
+        type: "text",
+        placeholder: "Фамилия",
         onBlur: (e) => {
           if (e.target instanceof HTMLInputElement) {
-            const second_name = { second_name: e.target.value };
+            const secondName = { second_name: e.target.value };
+            const messageError = validation(
+              "second_name",
+              secondName.second_name
+            );
             this.setProps({
-              ...second_name,
+              ...secondName,
+              disabled: !!messageError,
             });
+
+            return messageError;
           }
+          return "";
         },
       }),
-      InputPhone: new Input({
-        id: 'phone',
-        name: 'phone',
-        type: 'tel',
-        placeholder:'Телефон',
+      InputPhone: new InputContainer({
+        id: "phone",
+        name: "phone",
+        type: "tel",
+        placeholder: "Телефон",
         onBlur: (e) => {
           if (e.target instanceof HTMLInputElement) {
             const phone = { phone: e.target.value };
+            const messageError = validation("phone", phone.phone);
             this.setProps({
               ...phone,
+              disabled: !!messageError,
             });
+
+            return messageError;
           }
+          return "";
         },
       }),
-      InputPass: new Input({
-        id: 'password',
-        name: 'password',
-        type: 'password',
-        placeholder:'Пароль',
+      InputPass: new InputContainer({
+        id: "password",
+        name: "password",
+        type: "password",
+        placeholder: "Пароль",
         onBlur: (e) => {
           if (e.target instanceof HTMLInputElement) {
             const password = { password: e.target.value };
+            const messageError = validation("password", password.password);
             this.setProps({
               ...password,
+              disabled: !!messageError,
             });
+            return messageError;
           }
+          return "";
         },
       }),
-      ButtonRegister:  new Button({
-        id: 'register-button',
-        text: 'Зарегистрироваться',
+      ButtonRegister: new Button({
+        id: "register-button",
+        text: "Зарегистрироваться",
         onClick: () => {
           console.log({
-            'email': this.props.email,
-            'login': this.props.login,
-            'first_name': this.props.first_name,
-            'second_name': this.props.second_name,
-            'phone': this.props.phone,
-            'password': this.props.password
-          })
+            email: this.props.email,
+            login: this.props.login,
+            first_name: this.props.first_name,
+            second_name: this.props.second_name,
+            phone: this.props.phone,
+            password: this.props.password,
+          });
+          props.link("auth");
         },
       }),
-      ButtonEnter:  new Button({
-        id: 'enter-button',
-        text: 'Войти?',
+      ButtonEnter: new ButtonSecond({
+        id: "enter-button",
+        text: "Войти?",
+        onClick: () => {
+          props.link("auth");
+        },
       }),
     });
   }

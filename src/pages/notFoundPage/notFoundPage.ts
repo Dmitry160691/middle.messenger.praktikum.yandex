@@ -1,17 +1,19 @@
 import { Button } from '../../components/Button';
 import Block from '../../framework/Block';
 
-
+interface PageProps {
+  link?: (path: string) => void;
+}
 
 export class NotFoundPage extends Block {
-  constructor() {
+  constructor({ link }: PageProps) {
     super({
       Button:  new Button({
         id: 'return',
         text: 'На главную',
-        // onClick: () => {
-        //   nav('singIn');
-        // },
+        onClick: () => {
+          link('singIn');
+        },
       }),
     });
   }
