@@ -1,10 +1,11 @@
 import { ButtonSecond } from '../../components/ButtonSecond';
 import { FieldProfile } from '../../components/FieldProfile';
 import Block from '../../framework/Block';
+import { Pages, ProfileData } from '../../types';
 
 interface PageProps {
-  profileData: any,
-  link?: (path: string) => void;
+  profileData: ProfileData,
+  link?: (path: Pages) => void;
 }
 
 export class ProfilePage extends Block {
@@ -35,21 +36,21 @@ export class ProfilePage extends Block {
         id: 'edit-data',
         text: 'Изменить данные',
         onClick: () => {
-          link('profileEdit');
+          link(Pages.profileEdit);
         },
       }),
       ButtonEditPass:  new ButtonSecond({
         id: 'edit-password',
         text: 'Изменить пароль',
         onClick: () => {
-          link('passwordEdit');
+          link(Pages.passwordEdit);
         },
       }),
       ButtonExit:  new ButtonSecond({
         id: 'exit',
         text: 'Выйти',
         onClick: () => {
-          link('auth');
+          link(Pages.auth);
         },
       }),
     });

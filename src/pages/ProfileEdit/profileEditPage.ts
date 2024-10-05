@@ -1,10 +1,11 @@
 import { Button } from '../../components/Button';
 import { FieldEditProfile } from '../../components/FieldEditProfile';
 import Block from '../../framework/Block';
+import { Pages, ProfileData } from '../../types';
 
 interface PageProps {
-  profileData: any,
-  link?: (path: string) => void;
+  profileData: ProfileData,
+  link?: (path: Pages) => void;
 }
 
 export class ProfileEditPage extends Block {
@@ -40,7 +41,7 @@ export class ProfileEditPage extends Block {
         id: 'save-profile',
         text: 'Сохранить',
         onClick: () => {
-          link('profile');
+          link(Pages.profile);
         },
       }),
     });

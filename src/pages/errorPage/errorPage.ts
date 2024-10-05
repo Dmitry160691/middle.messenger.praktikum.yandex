@@ -3,7 +3,7 @@ import Block from '../../framework/Block';
 
 
 
-export class NotFoundPage extends Block {
+export class ErrorPage extends Block {
   constructor() {
     super({
       Button:  new Button({

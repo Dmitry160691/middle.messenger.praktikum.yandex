@@ -4,12 +4,13 @@ import { Dialog } from '../../components/Dialog';
 import { InputContainer } from '../../components/InputContainer';
 import { Logo } from '../../components/Logo';
 import Block from '../../framework/Block';
-import { validation } from '../../utils/validField';
+import { DialogData, Pages } from '../../types/types';
+import { validation } from '../../utils/validationField';
 
 interface PageProps {
-  contacts: any;
-  selectContact?: any;
-  link?: (path: string) => void;
+  contacts: DialogData[];
+  selectContact?: DialogData;
+  link?: (path: Pages) => void;
 }
 
 export class MessagesPage extends Block {
@@ -24,7 +25,7 @@ export class MessagesPage extends Block {
         src: 'src/assets/cogwheel.svg',
         alt: 'Шестеренка',
         onClick: () => {
-          link('profile');
+          link(Pages.profile);
         },
       }),
       ButtonSend: new Button({

@@ -1,4 +1,4 @@
-import { DataOptions, HTTPMethod, METHODS, Options } from '../types/fetch';
+import { DataOptions, HTTPMethod, METHODS, Options } from '../types';
 
 function queryStringify(data: DataOptions) {
   if (typeof data !== 'object') {
@@ -10,7 +10,7 @@ function queryStringify(data: DataOptions) {
     return `${result}${key}=${data[key]}${index < keys.length - 1 ? '&' : ''}`;
   }, '?');
 }
-// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 class HTTPTransport { 
   get: HTTPMethod = (url, options) =>
     this.request(url, { ...options, method: METHODS.GET }, options.timeout);

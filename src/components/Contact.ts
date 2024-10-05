@@ -1,9 +1,10 @@
 import Block from '../framework/Block';
+import { DialogData, DialogMessage } from '../types/types';
 
 interface ContactProps {
   name: string;
-  lastDialog: any;
-  selectContact?: any
+  lastDialog: DialogMessage;
+  selectContact?: DialogData
   onClick?: () => void;
 }
 

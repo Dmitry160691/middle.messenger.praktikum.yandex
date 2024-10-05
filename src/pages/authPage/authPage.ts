@@ -2,10 +2,11 @@ import { Button } from '../../components/Button';
 import { ButtonSecond } from '../../components/ButtonSecond';
 import { InputContainer } from '../../components/InputContainer';
 import Block from '../../framework/Block';
-import { validation } from '../../utils/validField';
+import { Pages } from '../../types/types';
+import { validation } from '../../utils/validationField';
 
 interface PageProps {
-  link?: (path: string) => void;
+  link?: (path: Pages) => void;
 }
 
 export class AuthPage extends Block {
@@ -59,15 +60,15 @@ export class AuthPage extends Block {
                 password: this.props.password,
               },
             );
-            props.link('message');
+            props.link(Pages.message);
           }
         },
       }),
-      ButtonSingIn:  new ButtonSecond({
+      ButtonsignIn:  new ButtonSecond({
         id: 'sign-in-button',
         text: 'Нет акаунта?',
         onClick: () => {
-          props.link('singIn');
+          props.link(Pages.signIn);
         },
       }),
     });
@@ -87,7 +88,7 @@ export class AuthPage extends Block {
     </main>
     <footer>
       {{{ButtonAuth}}}
-      {{{ButtonSingIn}}}
+      {{{ButtonsignIn}}}
     </footer>
   </div>
 </div>`;

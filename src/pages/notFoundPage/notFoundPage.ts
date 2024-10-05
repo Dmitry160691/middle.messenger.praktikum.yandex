@@ -1,8 +1,9 @@
 import { Button } from '../../components/Button';
 import Block from '../../framework/Block';
+import { Pages } from '../../types/types';
 
 interface PageProps {
-  link?: (path: string) => void;
+  link?: (path: Pages) => void;
 }
 
 export class NotFoundPage extends Block {
@@ -12,7 +13,7 @@ export class NotFoundPage extends Block {
         id: 'return',
         text: 'На главную',
         onClick: () => {
-          link('singIn');
+          link(Pages.signIn);
         },
       }),
     });

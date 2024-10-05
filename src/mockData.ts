@@ -1,14 +1,6 @@
-type Dialog = {
-  id: number;
-  name: string;
-  dialog: {
-    text: string;
-    isYou: boolean;
-    time: string;
-  }[];
-};
+import { DialogData, ProfileData } from './types/types';
 
-export const contacts: Dialog [] = [
+export const contacts: DialogData [] = [
   {
     id: 1,
     name: 'Дима',
@@ -116,7 +108,7 @@ export const contacts: Dialog [] = [
   },
 ];
 
-export const profileData = {
+export const profileData: ProfileData = {
   email: '@mail',
   login: 'login-test',
   first_name: 'dima',

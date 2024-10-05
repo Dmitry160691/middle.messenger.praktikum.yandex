@@ -69,7 +69,7 @@ export default class Block {
 
   private _componentDidMount(): void {
     this.componentDidMount();
-    Object.values(this.children).forEach(child => {child.dispatchComponentDidMount()});
+    Object.values(this.children).forEach(child => {child.dispatchComponentDidMount();});
   }
 
   protected componentDidMount(): void {}
@@ -141,7 +141,7 @@ export default class Block {
     Object.assign(this.props, nextProps);
   };
 
-  public setLists = (nextList: Record<string, any[]>): void => {
+  public setLists = (nextList: Record<string, unknown[]>): void => {
     if (!nextList) {
       return;
     }
@@ -219,7 +219,7 @@ export default class Block {
         const value = target[prop];
         return typeof value === 'function' ? value.bind(target) : value;
       },
-      set(target: BlockProps, prop: string, value: any) {
+      set(target: BlockProps, prop: string, value: unknown) {
         const oldTarget = { ...target };
         target[prop] = value;
         self.eventBus().emit(Block.EVENTS.FLOW_CDU, oldTarget, target);

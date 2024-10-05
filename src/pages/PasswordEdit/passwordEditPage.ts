@@ -1,10 +1,11 @@
 import { Button } from '../../components/Button';
 import { InputContainer } from '../../components/InputContainer';
 import Block from '../../framework/Block';
-import { validation } from '../../utils/validField';
+import { Pages } from '../../types';
+import { validation } from '../../utils/validationField';
 
 interface PageProps {
-  link?: (path: string) => void;
+  link?: (path: Pages) => void;
 }
 
 export class PasswordEditPage extends Block {
@@ -54,7 +55,7 @@ export class PasswordEditPage extends Block {
         onClick: () => {
           if (validation('oldPassword', this.props.oldPassword) === '' && validation('password', this.props.newPassword) === '') {
             console.log('Старый пароль не пустой, Новый пароль валидный. Ок');
-            props.link('profile');
+            props.link(Pages.profile);
           }
         },
       }),
