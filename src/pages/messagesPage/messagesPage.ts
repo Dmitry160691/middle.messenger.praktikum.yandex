@@ -2,8 +2,10 @@ import { Button } from '../../components/Button';
 import { Contact } from '../../components/Contact';
 import { Dialog } from '../../components/Dialog';
 import { Input } from '../../components/Input';
+import { InputContainer } from '../../components/InputContainer';
 import { Logo } from '../../components/Logo';
 import Block from '../../framework/Block';
+import { validation } from '../../utils/validField';
 
 interface PageProps {
   contacts: any,
@@ -27,11 +29,10 @@ export class MessagesPage extends Block {
         text: 'Отправить',
         onClick: () => {
           console.log({ message: this.props.message });
-          // this.addMessage(this.props.message);
         },
         
       }),
-      InputMessage: new Input({
+      InputMessage: new InputContainer({
         id: 'message',
         name: 'message',
         type: 'text',
@@ -39,10 +40,14 @@ export class MessagesPage extends Block {
         onBlur: (e) => {
           if (e.target instanceof HTMLInputElement) {
             const message = { message: e.target.value };
+            const messageError = validation('message', message.message)
             this.setProps({
               ...message,
+              disabled: !!messageError
             });
+            return messageError
           }
+          return ''
         },
       }),
       Contacts: contacts.map(
@@ -63,13 +68,6 @@ export class MessagesPage extends Block {
       Dialog:  new Dialog(),
     });
   }
-
-  // addMessage(value: string): void {
-  // let di = (this.lists.Dialog as Array<Dialog>).concat(
-  //   new Dialog({text: value, isYou: true})
-  // );
-  // this.setLists({ Dialog: di });
-  // }
 
   lastMessage(arr: any[]): any {
     if (arr.length) {

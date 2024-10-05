@@ -1,7 +1,6 @@
 import EventBus, { EventCallback } from './EventBus';
 import Handlebars from 'handlebars';
 import { v4 as uuidv4 } from 'uuid';
-import { areObjectsEqual } from '../utils/areObjectsEqual';
 
 interface BlockProps {
   [key: string]: any;
@@ -32,32 +31,19 @@ export default class Block {
     const { props, children, lists } = this._getChildrenPropsAndProps(propsWithChildren);
     this.props = this._makePropsProxy({ ...props });
     this.children = children;
-    this.lists = lists;
+    this.lists = this._makePropsProxy({ ...lists });
     this.eventBus = () => eventBus;
     this._registerEvents(eventBus);
     eventBus.emit(Block.EVENTS.INIT);
   }
 
   private _addEvents(): void {
-    const { events } = this.props;
-    if (events) {
-      Object.keys(events).forEach((eventName) => {
-        if (this._element) {
-          this._element.addEventListener(eventName, events[eventName]);
-        }
-      });
-    }
-  }
-
-  private _removeEvents(): void {
-    const { events } = this.props;
-    if (events) {
-      Object.keys(events).forEach((eventName) => {
-        if (this._element) {
-          this._element.removeEventListener(eventName, events[eventName]);
-        }
-      });
-    }
+    const { events = {} } = this.props;
+    Object.keys(events).forEach(eventName => {
+      if (this._element) {
+        this._element.addEventListener(eventName, events[eventName]);
+      }
+    });
   }
 
   private _registerEvents(eventBus: EventBus): void {
@@ -87,37 +73,10 @@ export default class Block {
     if (!response) {
       return;
     }
-
-    if (!areObjectsEqual(oldProps, newProps)) {
-      this._updateChildProps(newProps);
-      this._updateListProps(newProps);
-
-      this._render();
-    }
+    this._render();
   }
 
-  private _updateChildProps(props: BlockProps) {
-    Object.values(this.children).forEach((child) => {
-      Object.keys(props).forEach((prop) => {
-        if (!areObjectsEqual(child.props[prop], props[prop])) {
-          child.setProps({ [prop]: props[prop] });
-        }
-      });
-    });
-  }
-
-  private _updateListProps(props: BlockProps) {
-    Object.values(this.lists).forEach((list) => {
-      list.map((child: Block) => {
-        Object.keys(props).forEach((prop) => {
-          if (!areObjectsEqual(child.props[prop], props[prop])) {
-            child.setProps({ [prop]: props[prop] });
-          }
-        });
-      });
-    });
-  }
-
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   protected componentDidUpdate(_oldProps: BlockProps, _newProps: BlockProps): boolean {
     return true;
   }
@@ -137,6 +96,7 @@ export default class Block {
       } else if (Array.isArray(value)) {
         lists[key] = value;
       } else {
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
         props[key] = value;
       }
     });
@@ -154,6 +114,14 @@ export default class Block {
     });
   }
 
+  protected setAttributes(attr): void {
+    Object.entries(attr).forEach(([key, value]) => {
+      if (this._element) {
+        this._element.setAttribute(key, value as string);
+      }
+    });
+  }
+
   public setProps = (nextProps: BlockProps): void => {
     if (!nextProps) {
       return;
@@ -162,13 +130,20 @@ export default class Block {
     Object.assign(this.props, nextProps);
   };
 
+  public setLists = (nextList: Record<string, any[]>): void => {
+    if (!nextList) {
+      return;
+    }
+
+    Object.assign(this.lists, nextList);
+  };
+
   get element(): HTMLElement | null {
     return this._element;
   }
 
   private _render(): void {
     console.log('Render');
-    this._removeEvents();
     const propsAndStubs = { ...this.props };
     const tmpId = uuidv4();
     Object.entries(this.children).forEach(([key, child]) => {

@@ -9,9 +9,6 @@ export class NotFoundPage extends Block {
       Button:  new Button({
         id: 'return',
         text: 'На главную',
-        // onClick: () => {
-        //   nav('singIn');
-        // },
       }),
     });
   }

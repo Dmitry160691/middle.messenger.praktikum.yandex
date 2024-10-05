@@ -60,7 +60,7 @@ export default class App {
       }
     } else if (this.state.currentPage === 'profile') {
       const profilePage = new ProfilePage({
-        profileData: this.state.userState,
+        profileData: this.state.userState.profileData,
       });
       const template = profilePage.getContent();
       if (this.appElement && template) {
@@ -68,7 +68,7 @@ export default class App {
       }
     } else if (this.state.currentPage === 'profileEdit') {
       const profileEditPage = new ProfileEditPage({
-        profileData: this.state.userState,
+        profileData: this.state.userState.profileData,
       });
       const template = profileEditPage.getContent();
       if (this.appElement && template) {

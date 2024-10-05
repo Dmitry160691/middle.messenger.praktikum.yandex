@@ -1,15 +1,14 @@
 import Block from '../framework/Block';
 
-interface ButtonProps {
+interface ButtonSecondProps {
   id: string;
   text: string;
   class?: string;
   onClick?: (e: Event) => void;
-  disabled?: boolean;
 }
 
-export class Button extends Block {
-  constructor(props: ButtonProps) {
+export class ButtonSecond extends Block {
+  constructor(props: ButtonSecondProps) {
     super({
       ...props,
       events: {
@@ -19,6 +18,6 @@ export class Button extends Block {
   }
 
   render(): string {
-    return '<button id="{{id}}" {{#if disabled}}disabled{{/if}} class="button">{{text}}</button>';
+    return '<button id="{{id}}" class="button">{{text}}</button>';
   }
 }
