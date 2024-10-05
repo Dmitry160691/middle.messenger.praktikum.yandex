@@ -1,20 +1,12 @@
 import { Button } from '../../components/Button';
 import Block from '../../framework/Block';
-import { Pages } from '../../types/types';
-
-interface PageProps {
-  link?: (path: Pages) => void;
-}
 
 export class NotFoundPage extends Block {
-  constructor({ link }: PageProps) {
+  constructor() {
     super({
-      Button:  new Button({
+      Button: new Button({
         id: 'return',
         text: 'На главную',
-        onClick: () => {
-          link(Pages.signIn);
-        },
       }),
     });
   }

@@ -21,4 +21,3 @@ export class Logo extends Block {
     return '<div id="{{id}}" class="logo"><img src={{src}} alt={{alt}}></div>';
   }
 }
-

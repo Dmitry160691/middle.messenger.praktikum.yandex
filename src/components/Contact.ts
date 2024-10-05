@@ -4,13 +4,13 @@ import { DialogData, DialogMessage } from '../types/types';
 interface ContactProps {
   name: string;
   lastDialog: DialogMessage;
-  selectContact?: DialogData
+  selectContact?: DialogData;
   onClick?: () => void;
 }
 
 export class Contact extends Block {
   constructor(props: ContactProps) {
-    super({ 
+    super({
       ...props,
       events: {
         click: () => {

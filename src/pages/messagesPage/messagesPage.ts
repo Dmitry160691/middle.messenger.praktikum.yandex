@@ -4,17 +4,16 @@ import { Dialog } from '../../components/Dialog';
 import { InputContainer } from '../../components/InputContainer';
 import { Logo } from '../../components/Logo';
 import Block from '../../framework/Block';
-import { DialogData, Pages } from '../../types/types';
+import { DialogData } from '../../types';
 import { validation } from '../../utils/validationField';
 
 interface PageProps {
   contacts: DialogData[];
   selectContact?: DialogData;
-  link?: (path: Pages) => void;
 }
 
 export class MessagesPage extends Block {
-  constructor({ link, contacts, selectContact }: PageProps) {
+  constructor({ contacts, selectContact }: PageProps) {
     super({
       LogoStar: new Logo({
         src: 'src/assets/red-star.svg',
@@ -24,9 +23,6 @@ export class MessagesPage extends Block {
         id: 'logo-setting',
         src: 'src/assets/cogwheel.svg',
         alt: 'Шестеренка',
-        onClick: () => {
-          link(Pages.profile);
-        },
       }),
       ButtonSend: new Button({
         id: 'send-mail-button',

@@ -11,7 +11,7 @@ function queryStringify(data: DataOptions) {
   }, '?');
 }
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-class HTTPTransport { 
+class HTTPTransport {
   get: HTTPMethod = (url, options) =>
     this.request(url, { ...options, method: METHODS.GET }, options.timeout);
 
@@ -21,8 +21,12 @@ class HTTPTransport {
   post: HTTPMethod = (url, options) =>
     this.request(url, { ...options, method: METHODS.POST }, options.timeout);
 
-  delete = (url, options) => { 
-    return this.request(url, { ...options, method: METHODS.DELETE }, options.timeout);
+  delete = (url, options) => {
+    return this.request(
+      url,
+      { ...options, method: METHODS.DELETE },
+      options.timeout,
+    );
   };
 
   request = (url: string, options: Options, timeout = 5000) => {
@@ -37,27 +41,22 @@ class HTTPTransport {
       const xhr = new XMLHttpRequest();
       const isGet = method === METHODS.GET;
 
-      xhr.open(
-        method, 
-        isGet && !!data
-          ? `${url}${queryStringify(data)}`
-          : url,
-      );
+      xhr.open(method, isGet && !!data ? `${url}${queryStringify(data)}` : url);
 
-      Object.keys(headers).forEach(key => {
+      Object.keys(headers).forEach((key) => {
         xhr.setRequestHeader(key, headers[key]);
       });
-      
+
       xhr.onload = function () {
         resolve(xhr);
       };
-      
+
       xhr.onabort = reject;
       xhr.onerror = reject;
-      
+
       xhr.timeout = timeout;
       xhr.ontimeout = reject;
-          
+
       if (isGet || !data) {
         xhr.send();
       } else {

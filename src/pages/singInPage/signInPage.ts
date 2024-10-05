@@ -2,15 +2,10 @@ import { Button } from '../../components/Button';
 import { ButtonSecond } from '../../components/ButtonSecond';
 import { InputContainer } from '../../components/InputContainer';
 import Block from '../../framework/Block';
-import { Pages } from '../../types/types';
 import { validation } from '../../utils/validationField';
 
-interface PageProps {
-  link?: (path: Pages) => void;
-}
-
 export class SignInPage extends Block {
-  constructor(props: PageProps) {
+  constructor() {
     super({
       InputEmail: new InputContainer({
         id: 'email',
@@ -145,16 +140,12 @@ export class SignInPage extends Block {
               phone: this.props.phone,
               password: this.props.password,
             });
-            props.link(Pages.auth);
           }
         },
       }),
       ButtonEnter: new ButtonSecond({
         id: 'enter-button',
         text: 'Войти?',
-        onClick: () => {
-          props.link(Pages.auth);
-        },
       }),
     });
   }

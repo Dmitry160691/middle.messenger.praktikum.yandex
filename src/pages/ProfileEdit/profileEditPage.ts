@@ -1,15 +1,14 @@
 import { Button } from '../../components/Button';
 import { FieldEditProfile } from '../../components/FieldEditProfile';
 import Block from '../../framework/Block';
-import { Pages, ProfileData } from '../../types';
+import { ProfileData } from '../../types';
 
 interface PageProps {
-  profileData: ProfileData,
-  link?: (path: Pages) => void;
+  profileData: ProfileData;
 }
 
 export class ProfileEditPage extends Block {
-  constructor({ profileData, link }: PageProps) {
+  constructor({ profileData }: PageProps) {
     super({
       FieldEditProfileEmail: new FieldEditProfile({
         fieldName: 'Почта',
@@ -36,13 +35,10 @@ export class ProfileEditPage extends Block {
         fieldValue: profileData.phone,
         type: 'tel',
       }),
-      
-      ButtonSave:  new Button({
+
+      ButtonSave: new Button({
         id: 'save-profile',
         text: 'Сохранить',
-        onClick: () => {
-          link(Pages.profile);
-        },
       }),
     });
   }

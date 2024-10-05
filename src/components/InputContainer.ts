@@ -36,4 +36,3 @@ export class InputContainer extends Block {
           </div>`;
   }
 }
-

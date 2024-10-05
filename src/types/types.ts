@@ -3,7 +3,7 @@ export interface DialogData {
   name: string;
   dialog: DialogMessage[];
 }
-  
+
 export interface ProfileData {
   email: string;
   login: string;
@@ -35,7 +35,7 @@ export enum METHODS {
   PUT = 'PUT',
   DELETE = 'DELETE',
 }
-  
+
 export type Options = {
   data?: DataOptions;
   timeout?: number;
@@ -45,8 +45,7 @@ export type Options = {
     [key: string]: string;
   };
 };
-  
-export type DataOptions = Document | XMLHttpRequestBodyInit | null | undefined;
-  
-export type HTTPMethod = (url: string, options?: Options) => Promise<unknown>;
 
+export type DataOptions = Document | XMLHttpRequestBodyInit | null | undefined;
+
+export type HTTPMethod = (url: string, options?: Options) => Promise<unknown>;

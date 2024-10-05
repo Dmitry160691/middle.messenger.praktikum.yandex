@@ -1,6 +1,6 @@
 import { DialogData, ProfileData } from './types/types';
 
-export const contacts: DialogData [] = [
+export const contacts: DialogData[] = [
   {
     id: 1,
     name: 'Дима',
@@ -115,4 +115,3 @@ export const profileData: ProfileData = {
   second_name: 'diman',
   phone: '001',
 };
-

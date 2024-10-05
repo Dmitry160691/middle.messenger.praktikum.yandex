@@ -2,7 +2,7 @@ import Block from '../framework/Block';
 
 export class Dialog extends Block {
   constructor() {
-    super({ 
+    super({
       events: {
         click: () => {
           console.log(this.props.selectContact);

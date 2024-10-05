@@ -29,7 +29,8 @@ export default class Block {
 
   constructor(propsWithChildren: BlockProps = {}) {
     const eventBus = new EventBus();
-    const { props, children, lists } = this._getChildrenPropsAndProps(propsWithChildren);
+    const { props, children, lists } =
+      this._getChildrenPropsAndProps(propsWithChildren);
     this.props = this._makePropsProxy({ ...props });
     this.children = children;
     this.lists = this._makePropsProxy({ ...lists });
@@ -40,7 +41,7 @@ export default class Block {
 
   private _addEvents(): void {
     const { events = {} } = this.props;
-    Object.keys(events).forEach(eventName => {
+    Object.keys(events).forEach((eventName) => {
       if (this._element) {
         this._element.addEventListener(eventName, events[eventName]);
       }
@@ -49,7 +50,7 @@ export default class Block {
 
   private _removeEvents(): void {
     const { events = {} } = this.props;
-    Object.keys(events).forEach(eventName => {
+    Object.keys(events).forEach((eventName) => {
       if (this._element) {
         this._element.removeEventListener(eventName, events[eventName]);
       }
@@ -58,9 +59,18 @@ export default class Block {
 
   private _registerEvents(eventBus: EventBus): void {
     eventBus.on(Block.EVENTS.INIT, this.init.bind(this) as EventCallback);
-    eventBus.on(Block.EVENTS.FLOW_CDM, this._componentDidMount.bind(this) as EventCallback);
-    eventBus.on(Block.EVENTS.FLOW_CDU, this._componentDidUpdate.bind(this) as EventCallback);
-    eventBus.on(Block.EVENTS.FLOW_RENDER, this._render.bind(this) as EventCallback);
+    eventBus.on(
+      Block.EVENTS.FLOW_CDM,
+      this._componentDidMount.bind(this) as EventCallback,
+    );
+    eventBus.on(
+      Block.EVENTS.FLOW_CDU,
+      this._componentDidUpdate.bind(this) as EventCallback,
+    );
+    eventBus.on(
+      Block.EVENTS.FLOW_RENDER,
+      this._render.bind(this) as EventCallback,
+    );
   }
 
   protected init(): void {
@@ -69,7 +79,9 @@ export default class Block {
 
   private _componentDidMount(): void {
     this.componentDidMount();
-    Object.values(this.children).forEach(child => {child.dispatchComponentDidMount();});
+    Object.values(this.children).forEach((child) => {
+      child.dispatchComponentDidMount();
+    });
   }
 
   protected componentDidMount(): void {}
@@ -78,13 +90,16 @@ export default class Block {
     this.eventBus().emit(Block.EVENTS.FLOW_CDM);
   }
 
-  private _componentDidUpdate(oldProps: BlockProps, newProps: BlockProps): void {
+  private _componentDidUpdate(
+    oldProps: BlockProps,
+    newProps: BlockProps,
+  ): void {
     const response = this.componentDidUpdate();
     if (!response) {
       return;
     }
     if (!areObjectsEqual(oldProps, newProps)) {
-      this.updateChildrenProps(newProps);
+      this.updateChildrenProps(newProps); //перезаписывает click. пока выключено
       this._render();
     }
   }
@@ -94,9 +109,9 @@ export default class Block {
   }
 
   private _getChildrenPropsAndProps(propsAndChildren: BlockProps): {
-    children: Record<string, Block>,
-    props: BlockProps,
-    lists: Record<string, unknown[]>
+    children: Record<string, Block>;
+    props: BlockProps;
+    lists: Record<string, unknown[]>;
   } {
     const children: Record<string, Block> = {};
     const props: BlockProps = {};
@@ -167,7 +182,7 @@ export default class Block {
     const fragment = this._createDocumentElement('template');
     fragment.innerHTML = Handlebars.compile(this.render())(propsAndStubs);
 
-    Object.values(this.children).forEach(child => {
+    Object.values(this.children).forEach((child) => {
       const stub = fragment.content.querySelector(`[data-id="${child._id}"]`);
       if (stub) {
         stub.replaceWith(child.getContent());
@@ -176,7 +191,7 @@ export default class Block {
 
     Object.entries(this.lists).forEach(([, child]) => {
       const listCont = this._createDocumentElement('template');
-      child.forEach(item => {
+      child.forEach((item) => {
         if (item instanceof Block) {
           listCont.content.append(item.getContent());
         } else {
