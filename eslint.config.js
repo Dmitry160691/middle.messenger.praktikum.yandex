@@ -6,16 +6,36 @@ export default [
   {
     files: ["**/*.{js,mjs,cjs,ts}"],
     rules: {
-      ...airbnbBaseConfig.rules,
-    },
+        ...airbnbBaseConfig.rules,
+        'react/jsx-filename-extension': 'off',
+        'import/extensions': 'off',
+        'import/no-extraneous-dependencies': 'off',
+        '@typescript-eslint/no-explicit-any': 'off', 
+        '@typescript-eslint/no-unsafe-assignment': 'off',
+        '@typescript-eslint/no-unsafe-argument': 'off',
+        '@typescript-eslint/no-unsafe-return': 'off',
+        '@typescript-eslint/no-unsafe-call': 'off',
+        '@typescript-eslint/no-unsafe-member-access': 'off',
+        "@typescript-eslint/ban-ts-comment": "error"
+      }
   },
   {
-    languageOptions: {
-      globals: {
-        ...globals.browser,
-        ...globals.node,
+    languageOptions: { 
+        globals: {
+          ...globals.browser,
+          ...globals.node,
+          myCustomGlobal: "readonly"
+        },
+        ecmaVersion: 2022,
+        sourceType: "module",
+        parser: Parser,
+        parserOptions: {
+          ecmaVersion: 2020,
+          sourceType: 'module',
+          project: ['./tsconfig.json'],
+          tsconfigRootDir: __dirname,
+        },
       },
-    },
   },
   {
     plugins: {
