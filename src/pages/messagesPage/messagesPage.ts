@@ -1,10 +1,10 @@
-import { Button } from "../../components/Button";
-import { Contact } from "../../components/Contact";
-import { Dialog } from "../../components/Dialog";
-import { InputContainer } from "../../components/InputContainer";
-import { Logo } from "../../components/Logo";
-import Block from "../../framework/Block";
-import { validation } from "../../utils/validField";
+import { Button } from '../../components/Button';
+import { Contact } from '../../components/Contact';
+import { Dialog } from '../../components/Dialog';
+import { InputContainer } from '../../components/InputContainer';
+import { Logo } from '../../components/Logo';
+import Block from '../../framework/Block';
+import { validation } from '../../utils/validField';
 
 interface PageProps {
   contacts: any;
@@ -16,20 +16,20 @@ export class MessagesPage extends Block {
   constructor({ link, contacts, selectContact }: PageProps) {
     super({
       LogoStar: new Logo({
-        src: "star",
-        alt: "Звезда",
+        src: 'src/assets/red-star.svg',
+        alt: 'Звезда',
       }),
       LogoSetting: new Logo({
-        id: "logo-setting",
-        src: "cogwheel",
-        alt: "Шестеренка",
+        id: 'logo-setting',
+        src: 'src/assets/cogwheel.svg',
+        alt: 'Шестеренка',
         onClick: () => {
-          link("profile");
+          link('profile');
         },
       }),
       ButtonSend: new Button({
-        id: "send-mail-button",
-        text: "Отправить",
+        id: 'send-mail-button',
+        text: 'Отправить',
         disabled: true,
         onClick: () => {
           if (this.props.message) {
@@ -38,21 +38,21 @@ export class MessagesPage extends Block {
         },
       }),
       InputMessage: new InputContainer({
-        id: "message",
-        name: "message",
-        type: "text",
-        placeholder: "Сообщение",
+        id: 'message',
+        name: 'message',
+        type: 'text',
+        placeholder: 'Сообщение',
         onBlur: (e) => {
           if (e.target instanceof HTMLInputElement) {
             const message = { message: e.target.value };
-            const messageError = validation("message", message.message);
+            const messageError = validation('message', message.message);
             this.setProps({
               ...message,
               disabled: !!messageError,
             });
             return messageError;
           }
-          return "";
+          return '';
         },
       }),
       Contacts: contacts.map((item) => {

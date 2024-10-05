@@ -1,12 +1,12 @@
-import { AuthPage } from "./pages/authPage/authPage";
-import { MessagesPage } from "./pages/messagesPage/messagesPage";
-import { SignInPage } from "./pages/singInPage/signInPage";
-import { contacts, profileData } from "./mockData.js";
-import { ProfilePage } from "./pages/Profile/profilePage";
-import { ProfileEditPage } from "./pages/ProfileEdit/profileEditPage";
-import { AvatarEditPage } from "./pages/AvatarEdit/avatarEditPage";
-import { PasswordEditPage } from "./pages/PasswordEdit/passwordEditPage";
-import { NotFoundPage } from "./pages/notFoundPage/notFoundPage";
+import { AuthPage } from './pages/authPage/authPage';
+import { MessagesPage } from './pages/messagesPage/messagesPage';
+import { SignInPage } from './pages/singInPage/signInPage';
+import { contacts, profileData } from './mockData.js';
+import { ProfilePage } from './pages/Profile/profilePage';
+import { ProfileEditPage } from './pages/ProfileEdit/profileEditPage';
+import { AvatarEditPage } from './pages/AvatarEdit/avatarEditPage';
+import { PasswordEditPage } from './pages/PasswordEdit/passwordEditPage';
+import { NotFoundPage } from './pages/notFoundPage/notFoundPage';
 // import star from "./assets/red-star.svg";
 // import cogwheel from "./assets/cogwheel.svg";
 
@@ -23,7 +23,7 @@ export default class App {
 
   constructor() {
     this.state = {
-      currentPage: "auth",
+      currentPage: 'auth',
       userState: {
         profileData,
       },
@@ -31,11 +31,11 @@ export default class App {
         contacts,
       },
     };
-    this.appElement = document.getElementById("app");
+    this.appElement = document.getElementById('app');
   }
 
   render() {
-    if (this.state.currentPage === "auth") {
+    if (this.state.currentPage === 'auth') {
       const authPage = new AuthPage({
         link: (path) => this.changePage(path),
       });
@@ -43,7 +43,7 @@ export default class App {
       if (this.appElement && template) {
         this.appElement.replaceChildren(template);
       }
-    } else if (this.state.currentPage === "singIn") {
+    } else if (this.state.currentPage === 'singIn') {
       const singInPage = new SignInPage({
         link: (path) => this.changePage(path),
       });
@@ -51,7 +51,7 @@ export default class App {
       if (this.appElement && template) {
         this.appElement.replaceChildren(template);
       }
-    } else if (this.state.currentPage === "message") {
+    } else if (this.state.currentPage === 'message') {
       const messagesPage = new MessagesPage({
         contacts,
         link: (path) => this.changePage(path),
@@ -60,7 +60,7 @@ export default class App {
       if (this.appElement && template) {
         this.appElement.replaceChildren(template);
       }
-    } else if (this.state.currentPage === "profile") {
+    } else if (this.state.currentPage === 'profile') {
       const profilePage = new ProfilePage({
         profileData: this.state.userState.profileData,
         link: (path) => this.changePage(path),
@@ -69,7 +69,7 @@ export default class App {
       if (this.appElement && template) {
         this.appElement.replaceChildren(template);
       }
-    } else if (this.state.currentPage === "profileEdit") {
+    } else if (this.state.currentPage === 'profileEdit') {
       const profileEditPage = new ProfileEditPage({
         profileData: this.state.userState.profileData,
         link: (path) => this.changePage(path),
@@ -78,7 +78,7 @@ export default class App {
       if (this.appElement && template) {
         this.appElement.replaceChildren(template);
       }
-    } else if (this.state.currentPage === "passwordEdit") {
+    } else if (this.state.currentPage === 'passwordEdit') {
       const passwordEditPage = new PasswordEditPage({
         link: (path) => this.changePage(path),
       });
@@ -86,7 +86,7 @@ export default class App {
       if (this.appElement && template) {
         this.appElement.replaceChildren(template);
       }
-    } else if (this.state.currentPage === "avatarEdit") {
+    } else if (this.state.currentPage === 'avatarEdit') {
       const avatarEditPage = new AvatarEditPage();
       const template = avatarEditPage.getContent();
       if (this.appElement && template) {
@@ -99,7 +99,7 @@ export default class App {
       const template = notFound.getContent();
       if (this.appElement && template) {
         this.appElement.replaceChildren(template);
-        this.state.currentPage = "notFound";
+        this.state.currentPage = 'notFound';
       }
     }
   }

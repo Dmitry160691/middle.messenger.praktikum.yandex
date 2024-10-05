@@ -79,7 +79,7 @@ export default class Block {
   }
 
   private _componentDidUpdate(oldProps: BlockProps, newProps: BlockProps): void {
-    const response = this.componentDidUpdate(oldProps, newProps);
+    const response = this.componentDidUpdate();
     if (!response) {
       return;
     }
@@ -89,7 +89,7 @@ export default class Block {
     }
   }
 
-  protected componentDidUpdate(_oldProps: BlockProps, _newProps: BlockProps): boolean {
+  protected componentDidUpdate(): boolean {
     return true;
   }
 
@@ -108,7 +108,6 @@ export default class Block {
       } else if (Array.isArray(value)) {
         lists[key] = value;
       } else {
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
         props[key] = value;
       }
     });
