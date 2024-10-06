@@ -1,9 +1,13 @@
 import globals from "globals";
 import tseslint from "typescript-eslint";
 import airbnbBaseConfig from "eslint-config-airbnb-base";
+import prettierPlugin from 'eslint-plugin-prettier';
 
 export default [
   {
+    plugins: {
+      prettier: prettierPlugin,
+    },
     files: ["**/*.{js,mjs,cjs,ts}"],
     rules: {
         ...airbnbBaseConfig.rules,

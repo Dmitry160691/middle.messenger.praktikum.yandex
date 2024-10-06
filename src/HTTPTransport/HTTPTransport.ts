@@ -25,11 +25,7 @@ export class HTTPTransport {
     this.request(url, { ...options, method: METHODS.POST }, options?.timeout);
 
   delete: HTTPMethod = (url, options) =>
-    this.request(
-      url,
-      { ...options, method: METHODS.DELETE },
-      options?.timeout,
-  );
+    this.request(url, { ...options, method: METHODS.DELETE }, options?.timeout);
 
   request = (url: string, options: Options, timeout = 5000) => {
     const { headers = {}, method, data } = options;

@@ -18,8 +18,7 @@ export class AuthPage extends Block {
             const messageError = validation('login', login.login);
             this.setProps({
               ...login,
-              disabled:
-                !!messageError || !!validation('password', this.props.password),
+              disabled: !!messageError || !!validation('password', this.props.password),
             });
             return messageError;
           }
@@ -37,8 +36,7 @@ export class AuthPage extends Block {
             const messageError = validation('password', password.password);
             this.setProps({
               ...password,
-              disabled:
-                !!messageError || !!validation('login', this.props.login),
+              disabled: !!messageError || !!validation('login', this.props.login),
             });
             return messageError;
           }

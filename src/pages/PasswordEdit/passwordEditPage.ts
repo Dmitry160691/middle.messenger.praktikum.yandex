@@ -14,15 +14,10 @@ export class PasswordEditPage extends Block {
         onBlur: (e) => {
           if (e.target instanceof HTMLInputElement) {
             const oldPassword = { oldPassword: e.target.value };
-            const messageError = validation(
-              'oldPassword',
-              oldPassword.oldPassword,
-            );
+            const messageError = validation('oldPassword', oldPassword.oldPassword);
             this.setProps({
               ...oldPassword,
-              disabled:
-                !!messageError ||
-                !!validation('password', this.props.newPassword),
+              disabled: !!messageError || !!validation('password', this.props.newPassword),
             });
             return messageError;
           }
@@ -37,15 +32,10 @@ export class PasswordEditPage extends Block {
         onBlur: (e) => {
           if (e.target instanceof HTMLInputElement) {
             const newPassword = { newPassword: e.target.value };
-            const messageError = validation(
-              'password',
-              newPassword.newPassword,
-            );
+            const messageError = validation('password', newPassword.newPassword);
             this.setProps({
               ...newPassword,
-              disabled:
-                !!messageError ||
-                !!validation('oldPassword', this.props.oldPassword),
+              disabled: !!messageError || !!validation('oldPassword', this.props.oldPassword),
             });
             return messageError;
           }

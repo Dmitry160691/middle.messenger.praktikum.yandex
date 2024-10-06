@@ -31,8 +31,7 @@ export default class Block {
 
   constructor(propsWithChildren: BlockProps = {}) {
     const eventBus = new EventBus();
-    const { props, children, lists } =
-      this._getChildrenPropsAndProps(propsWithChildren);
+    const { props, children, lists } = this._getChildrenPropsAndProps(propsWithChildren);
     this.props = this._makePropsProxy({ ...props });
     this.children = children;
     this.lists = lists;
@@ -61,18 +60,9 @@ export default class Block {
 
   private _registerEvents(eventBus: EventBus): void {
     eventBus.on(Block.EVENTS.INIT, this.init.bind(this) as EventCallback);
-    eventBus.on(
-      Block.EVENTS.FLOW_CDM,
-      this._componentDidMount.bind(this) as EventCallback,
-    );
-    eventBus.on(
-      Block.EVENTS.FLOW_CDU,
-      this._componentDidUpdate.bind(this) as EventCallback,
-    );
-    eventBus.on(
-      Block.EVENTS.FLOW_RENDER,
-      this._render.bind(this) as EventCallback,
-    );
+    eventBus.on(Block.EVENTS.FLOW_CDM, this._componentDidMount.bind(this) as EventCallback);
+    eventBus.on(Block.EVENTS.FLOW_CDU, this._componentDidUpdate.bind(this) as EventCallback);
+    eventBus.on(Block.EVENTS.FLOW_RENDER, this._render.bind(this) as EventCallback);
   }
 
   protected init(): void {
@@ -92,10 +82,7 @@ export default class Block {
     this.eventBus().emit(Block.EVENTS.FLOW_CDM);
   }
 
-  private _componentDidUpdate(
-    oldProps: BlockProps,
-    newProps: BlockProps,
-  ): void {
+  private _componentDidUpdate(oldProps: BlockProps, newProps: BlockProps): void {
     const response = this.componentDidUpdate();
     if (!response) {
       return;

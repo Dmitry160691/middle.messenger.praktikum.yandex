@@ -69,10 +69,7 @@ export class SignInPage extends Block {
         onBlur: (e) => {
           if (e.target instanceof HTMLInputElement) {
             const secondName = { second_name: e.target.value };
-            const messageError = validation(
-              'second_name',
-              secondName.second_name,
-            );
+            const messageError = validation('second_name', secondName.second_name);
             this.setProps({
               ...secondName,
               disabled: !!messageError,
