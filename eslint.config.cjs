@@ -8,7 +8,7 @@ export default [
     plugins: {
       prettier: prettierPlugin,
     },
-    files: ["**/*.{js,mjs,cjs,ts}"],
+    files: ["**/*.{js,cjs,ts}"],
     rules: {
         ...airbnbBaseConfig.rules,
         'react/jsx-filename-extension': 'off',
