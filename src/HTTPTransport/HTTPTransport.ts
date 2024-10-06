@@ -1,38 +1,40 @@
 import { DataOptions, HTTPMethod, METHODS, Options } from '../types';
 
-function queryStringify(data: DataOptions) {
-  if (typeof data !== 'object') {
-    throw new Error('Data must be object');
+export class HTTPTransport {
+  queryStringify(data: DataOptions) {
+    if (typeof data !== 'object' || data === null) {
+      throw new Error('Data must be object');
+    }
+
+    let result = '?';
+
+    for (const [key, value] of Object.entries(data)) {
+      result += `${key}=${value}&`;
+    }
+
+    return result.slice(0, -1);
   }
 
-  const keys = Object.keys(data);
-  return keys.reduce((result, key, index) => {
-    return `${result}${key}=${data[key]}${index < keys.length - 1 ? '&' : ''}`;
-  }, '?');
-}
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-class HTTPTransport {
   get: HTTPMethod = (url, options) =>
-    this.request(url, { ...options, method: METHODS.GET }, options.timeout);
+    this.request(url, { ...options, method: METHODS.GET }, options?.timeout);
 
   put: HTTPMethod = (url, options) =>
-    this.request(url, { ...options, method: METHODS.PUT }, options.timeout);
+    this.request(url, { ...options, method: METHODS.PUT }, options?.timeout);
 
   post: HTTPMethod = (url, options) =>
-    this.request(url, { ...options, method: METHODS.POST }, options.timeout);
+    this.request(url, { ...options, method: METHODS.POST }, options?.timeout);
 
-  delete = (url, options) => {
-    return this.request(
+  delete: HTTPMethod = (url, options) =>
+    this.request(
       url,
       { ...options, method: METHODS.DELETE },
-      options.timeout,
-    );
-  };
+      options?.timeout,
+  );
 
   request = (url: string, options: Options, timeout = 5000) => {
     const { headers = {}, method, data } = options;
 
-    return new Promise(function (resolve, reject) {
+    return new Promise((resolve, reject) => {
       if (!method) {
         reject('No method');
         return;
@@ -41,7 +43,7 @@ class HTTPTransport {
       const xhr = new XMLHttpRequest();
       const isGet = method === METHODS.GET;
 
-      xhr.open(method, isGet && !!data ? `${url}${queryStringify(data)}` : url);
+      xhr.open(method, url);
 
       Object.keys(headers).forEach((key) => {
         xhr.setRequestHeader(key, headers[key]);

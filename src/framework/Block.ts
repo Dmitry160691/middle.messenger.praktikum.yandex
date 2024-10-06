@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import EventBus, { EventCallback } from './EventBus';
 import Handlebars from 'handlebars';
 import { v4 as uuidv4 } from 'uuid';
@@ -33,7 +35,7 @@ export default class Block {
       this._getChildrenPropsAndProps(propsWithChildren);
     this.props = this._makePropsProxy({ ...props });
     this.children = children;
-    this.lists = this._makePropsProxy({ ...lists });
+    this.lists = lists;
     this.eventBus = () => eventBus;
     this._registerEvents(eventBus);
     eventBus.emit(Block.EVENTS.INIT);
@@ -111,11 +113,11 @@ export default class Block {
   private _getChildrenPropsAndProps(propsAndChildren: BlockProps): {
     children: Record<string, Block>;
     props: BlockProps;
-    lists: Record<string, unknown[]>;
+    lists: Record<string, any[]>;
   } {
     const children: Record<string, Block> = {};
     const props: BlockProps = {};
-    const lists: Record<string, unknown[]> = {};
+    const lists: Record<string, any[]> = {};
 
     Object.entries(propsAndChildren).forEach(([key, value]) => {
       if (value instanceof Block) {
@@ -140,28 +142,12 @@ export default class Block {
     });
   }
 
-  protected setAttributes(attr): void {
-    Object.entries(attr).forEach(([key, value]) => {
-      if (this._element) {
-        this._element.setAttribute(key, value as string);
-      }
-    });
-  }
-
   public setProps = (nextProps: BlockProps): void => {
     if (!nextProps) {
       return;
     }
 
     Object.assign(this.props, nextProps);
-  };
-
-  public setLists = (nextList: Record<string, unknown[]>): void => {
-    if (!nextList) {
-      return;
-    }
-
-    Object.assign(this.lists, nextList);
   };
 
   get element(): HTMLElement | null {
@@ -234,7 +220,7 @@ export default class Block {
         const value = target[prop];
         return typeof value === 'function' ? value.bind(target) : value;
       },
-      set(target: BlockProps, prop: string, value: unknown) {
+      set(target: BlockProps, prop: string, value: any) {
         const oldTarget = { ...target };
         target[prop] = value;
         self.eventBus().emit(Block.EVENTS.FLOW_CDU, oldTarget, target);
