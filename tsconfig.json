@@ -5,17 +5,14 @@
     "module": "ESNext",
     "lib": ["ES2020", "DOM", "DOM.Iterable"],
     "skipLibCheck": true,
-
     "moduleResolution": "bundler",
     "allowImportingTsExtensions": true,
     "isolatedModules": true,
     "moduleDetection": "force",
     "noEmit": true,
-
     "noImplicitAny": true,
     "sourceMap": true,
     "strictNullChecks": true,
-
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
