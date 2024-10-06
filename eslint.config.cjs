@@ -1,53 +1,36 @@
 import globals from "globals";
+import pluginJs from "@eslint/js";
 import tseslint from "typescript-eslint";
-import airbnbBaseConfig from "eslint-config-airbnb-base";
-import prettierPlugin from 'eslint-plugin-prettier';
 
 export default [
+  { languageOptions: { globals: globals.browser } },
+  { ignores: ["node_modules", "dist"] },
   {
-    plugins: {
-      prettier: prettierPlugin,
-    },
-    files: ["**/*.{js,cjs,ts}"],
-    rules: {
-        ...airbnbBaseConfig.rules,
-        'react/jsx-filename-extension': 'off',
-        'import/extensions': 'off',
-        'import/no-extraneous-dependencies': 'off',
-        '@typescript-eslint/no-explicit-any': 'off', 
-        '@typescript-eslint/no-unsafe-assignment': 'off',
-        '@typescript-eslint/no-unsafe-argument': 'off',
-        '@typescript-eslint/no-unsafe-return': 'off',
-        '@typescript-eslint/no-unsafe-call': 'off',
-        '@typescript-eslint/no-unsafe-member-access': 'off',
-        "@typescript-eslint/ban-ts-comment": "error"
-      }
-  },
-  {
-    languageOptions: { 
-        globals: {
-          ...globals.browser,
-          ...globals.node,
-          myCustomGlobal: "readonly"
-        },
-        ecmaVersion: 2022,
-        sourceType: "module",
-        parser: Parser,
-        parserOptions: {
-          ecmaVersion: 2020,
-          sourceType: 'module',
-          project: ['./tsconfig.json'],
-          tsconfigRootDir: __dirname,
-        },
+    files: ["**/*.cjs"],
+    languageOptions: {
+      sourceType: "commonjs",
+      globals: {
+        ...globals.node,
+        ...globals.amd,
       },
-  },
-  {
-    plugins: {
-      "@typescript-eslint": tseslint.plugin,
     },
   },
-  {
-    ignores: ["node_modules", "dist"],
-  },
+  pluginJs.configs.recommended,
   ...tseslint.configs.recommended,
+  {
+    files: ["**/*.{js,mjs,cjs,ts}"],
+    languageOptions: {
+      parser: "@typescript-eslint/parser",
+      parserOptions: {
+        ecmaVersion: 2020,
+        sourceType: "module",
+        project: "./tsconfig.json",
+        tsconfigRootDir: __dirname,
+      },
+    },
+    plugins: ["@typescript-eslint"],
+    rules: {
+      "@typescript-eslint/ban-ts-comment": "off",
+    },
+  },
 ];
