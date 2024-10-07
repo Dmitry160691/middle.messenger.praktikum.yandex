@@ -2,8 +2,7 @@ import Block from '../framework/Block';
 
 interface LogoProps {
   id?: string;
-  src: string;
-  alt: string;
+  class: string;
   onClick?: (e: Event) => void;
 }
 
@@ -18,6 +17,6 @@ export class Logo extends Block {
   }
 
   render(): string {
-    return '<div id="{{id}}" class="logo"><img src={{src}} alt={{alt}}></div>';
+    return '<div id="{{id}}" class="{{class}}"></div>';
   }
 }

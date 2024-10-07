@@ -120,15 +120,19 @@ h3 {
   gap: 5px;
 }
 
-.logo {
+.logo-star,
+.logo-setting {
   height: 20px;
   width: 20px;
+  cursor: pointer;
 }
 
-.logo img {
-  cursor: pointer;
-  max-height: 100%;
-  max-width: 100%;
+.logo-star {
+  background: no-repeat center center / contain url('../assets/red-star.svg');
+}
+
+.logo-setting {
+  background: no-repeat center center / contain url('../assets/cogwheel.svg');
 }
 
 .messages-container {

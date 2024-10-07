@@ -16,13 +16,11 @@ export class MessagesPage extends Block {
   constructor({ contacts, selectContact }: PageProps) {
     super({
       LogoStar: new Logo({
-        src: 'src/assets/red-star.svg',
-        alt: 'Звезда',
+        class: 'logo-star',
       }),
       LogoSetting: new Logo({
         id: 'logo-setting',
-        src: 'src/assets/cogwheel.svg',
-        alt: 'Шестеренка',
+        class: 'logo-setting',
       }),
       ButtonSend: new Button({
         id: 'send-mail-button',
