@@ -88,7 +88,8 @@ export default class Block {
       return;
     }
     if (!areObjectsEqual(oldProps, newProps)) {
-      this.updateChildrenProps(newProps); //перезаписывает click. пока выключено
+      this.updateChildrenProps(newProps); 
+      this.updateListProps(newProps);
       this._render();
     }
   }
@@ -243,6 +244,18 @@ export default class Block {
         if (!areObjectsEqual(child.props[prop], props[prop])) {
           child.setProps({ [prop]: props[prop] });
         }
+      });
+    });
+  }
+
+  private updateListProps(props: BlockProps) {
+    Object.values(this.lists).forEach((list) => {
+      list.map((child: Block) => {
+        Object.keys(props).forEach((prop) => {
+          if (!areObjectsEqual(child.props[prop], props[prop])) {
+            child.setProps({ [prop]: props[prop] });
+          }
+        });
       });
     });
   }

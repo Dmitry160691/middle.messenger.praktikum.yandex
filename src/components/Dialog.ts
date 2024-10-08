@@ -31,6 +31,8 @@ export class Dialog extends Block {
               <p>{{text}}</p>
               </div>
          {{/each}}
+         {{else}}
+            <div>С кем хотите пообщаться?</div>
         {{/if}}
          </div>
       </div>

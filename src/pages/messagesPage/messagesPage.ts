@@ -52,7 +52,7 @@ export class MessagesPage extends Block {
       }),
       Contacts: contacts.map((item) => {
         return new Contact({
-          name: item.name,
+          contactInfo: item,
           lastDialog: item.dialog[item.dialog.length - 1],
           selectContact: selectContact,
           onClick: () => {
