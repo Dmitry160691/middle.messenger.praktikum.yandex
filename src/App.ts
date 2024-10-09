@@ -8,10 +8,10 @@ import { ProfilePage } from './pages/Profile/profilePage';
 import { ProfileEditPage } from './pages/ProfileEdit/profileEditPage';
 import { SignInPage } from './pages/singInPage/signInPage';
 import { DialogData, ProfileData } from './types';
-import Handlebars from "handlebars";
+import Handlebars from 'handlebars';
 
-Handlebars.registerHelper('ifEquals', function(arg1, arg2) {
-  return arg1 === arg2
+Handlebars.registerHelper('ifEquals', function (arg1, arg2) {
+  return arg1 === arg2;
 });
 
 interface AppState {

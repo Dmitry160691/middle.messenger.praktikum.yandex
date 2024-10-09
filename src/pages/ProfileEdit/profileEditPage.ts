@@ -1,7 +1,8 @@
 import { Button } from '../../components/Button';
-import { FieldEditProfile } from '../../components/FieldEditProfile';
+import { InputContainer } from '../../components/InputContainer';
 import Block from '../../framework/Block';
 import { ProfileData } from '../../types';
+import { validation } from '../../utils/validationField';
 
 interface PageProps {
   profileData: ProfileData;
@@ -10,35 +11,128 @@ interface PageProps {
 export class ProfileEditPage extends Block {
   constructor({ profileData }: PageProps) {
     super({
-      FieldEditProfileEmail: new FieldEditProfile({
-        fieldName: 'Почта',
-        fieldValue: profileData.email,
+      InputEmail: new InputContainer({
+        id: 'email',
+        name: 'email',
         type: 'text',
+        value: profileData.email,
+        placeholder: 'Почта',
+        label: 'Почта',
+        onBlur: (e) => {
+          if (e.target instanceof HTMLInputElement) {
+            const email = { email: e.target.value };
+            const messageError = validation('email', email.email);
+            this.setProps({
+              ...email,
+              disabled: !!messageError,
+            });
+            return messageError;
+          }
+          return '';
+        },
       }),
-      FieldEditProfileLogin: new FieldEditProfile({
-        fieldName: 'Логин',
-        fieldValue: profileData.login,
+      InputLogin: new InputContainer({
+        id: 'login',
+        name: 'login',
         type: 'text',
+        label: 'Логин',
+        value: profileData.login,
+        placeholder: 'Логин',
+        onBlur: (e) => {
+          if (e.target instanceof HTMLInputElement) {
+            const login = { login: e.target.value };
+            const messageError = validation('login', login.login);
+            this.setProps({
+              ...login,
+              disabled: !!messageError,
+            });
+            return messageError;
+          }
+          return '';
+        },
       }),
-      FieldEditProfileFirstName: new FieldEditProfile({
-        fieldName: 'Имя',
-        fieldValue: profileData.first_name,
+      InputFirstName: new InputContainer({
+        id: 'first_name',
+        name: 'first_name',
         type: 'text',
+        value: profileData.first_name,
+        label: 'Имя',
+        placeholder: 'Имя',
+        onBlur: (e) => {
+          if (e.target instanceof HTMLInputElement) {
+            const firstName = { first_name: e.target.value };
+            const messageError = validation('first_name', firstName.first_name);
+            this.setProps({
+              ...firstName,
+              disabled: !!messageError,
+            });
+            return messageError;
+          }
+          return '';
+        },
       }),
-      FieldEditProfileSecondName: new FieldEditProfile({
-        fieldName: 'Фамилия',
-        fieldValue: profileData.second_name,
+      InputSecondName: new InputContainer({
+        id: 'second_name',
+        name: 'second_name',
         type: 'text',
-      }),
-      FieldEditProfilePhone: new FieldEditProfile({
-        fieldName: 'Телефон',
-        fieldValue: profileData.phone,
-        type: 'tel',
-      }),
+        value: profileData.second_name,
+        placeholder: 'Фамилия',
+        label: 'Фамилия',
+        onBlur: (e) => {
+          if (e.target instanceof HTMLInputElement) {
+            const secondName = { second_name: e.target.value };
+            const messageError = validation('second_name', secondName.second_name);
+            this.setProps({
+              ...secondName,
+              disabled: !!messageError,
+            });
 
+            return messageError;
+          }
+          return '';
+        },
+      }),
+      InputPhone: new InputContainer({
+        id: 'phone',
+        name: 'phone',
+        type: 'tel',
+        value: profileData.phone,
+        placeholder: 'Телефон',
+        label: 'Телефон',
+        onBlur: (e) => {
+          if (e.target instanceof HTMLInputElement) {
+            const phone = { phone: e.target.value };
+            const messageError = validation('phone', phone.phone);
+            this.setProps({
+              ...phone,
+              disabled: !!messageError,
+            });
+
+            return messageError;
+          }
+          return '';
+        },
+      }),
       ButtonSave: new Button({
-        id: 'save-profile',
+        id: 'register-button',
         text: 'Сохранить',
+        onClick: () => {
+          if (
+            this.props.email &&
+            this.props.login &&
+            this.props.first_name &&
+            this.props.second_name &&
+            this.props.phone
+          ) {
+            console.log({
+              email: this.props.email,
+              login: this.props.login,
+              first_name: this.props.first_name,
+              second_name: this.props.second_name,
+              phone: this.props.phone,
+            });
+          }
+        },
       }),
     });
   }
@@ -52,11 +146,11 @@ export class ProfileEditPage extends Block {
     <h2>Имя</h2>
     </header>
     <main>
-      {{{FieldEditProfileEmail}}}
-      {{{FieldEditProfileLogin}}}
-      {{{FieldEditProfileFirstName}}}
-      {{{FieldEditProfileSecondName}}}
-      {{{FieldEditProfilePhone}}}
+      {{{InputEmail}}}
+      {{{InputLogin}}}
+      {{{InputFirstName}}}
+      {{{InputSecondName}}}
+      {{{InputPhone}}}
   </main>
   <footer>
     {{{ButtonSave}}}

@@ -1,10 +1,10 @@
 import Block from '../framework/Block';
 
-interface InputProps {
+export interface InputProps {
   id: string;
   name: string;
   type: string;
-  placeholder: string;
+  placeholder?: string;
   value?: string;
   onBlur?: (e: Event) => void;
 }

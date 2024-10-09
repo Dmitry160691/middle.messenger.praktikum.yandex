@@ -88,7 +88,7 @@ export default class Block {
       return;
     }
     if (!areObjectsEqual(oldProps, newProps)) {
-      this.updateChildrenProps(newProps); 
+      this.updateChildrenProps(newProps);
       this.updateListProps(newProps);
       this._render();
     }

@@ -7,6 +7,7 @@ interface InputContainerProps {
   type: string;
   placeholder: string;
   value?: string;
+  label?: string;
   onBlur: (e: Event) => string;
 }
 
@@ -31,6 +32,7 @@ export class InputContainer extends Block {
 
   render(): string {
     return `<div class="inputContainer">
+              {{# if label }}<p>{{ label }}</p>{{/if}}
               {{{ Input }}}
               {{# if message }}<div class="helper-message">{{ message }}</div>{{/if}}
           </div>`;
