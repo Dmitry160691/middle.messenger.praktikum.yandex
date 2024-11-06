@@ -1,21 +1,25 @@
+import { Avatar } from '../../components/Avatar';
 import { Button } from '../../components/Button';
 import { InputContainer } from '../../components/InputContainer';
+import UserController from '../../controllers/UserController';
 import Block from '../../framework/Block';
-import { ProfileData } from '../../types';
+import { connect } from '../../framework/HOC';
+import { router } from '../../framework/Router';
+import { store } from '../../framework/Store';
 import { validation } from '../../utils/validationField';
 
-interface PageProps {
-  profileData: ProfileData;
-}
+class ProfileEditPage extends Block<StringIndexed> {
+  constructor() {
+    const { profileState } = store.getState();
 
-export class ProfileEditPage extends Block {
-  constructor({ profileData }: PageProps) {
+    const { profile } = profileState;
+
     super({
       InputEmail: new InputContainer({
         id: 'email',
         name: 'email',
         type: 'text',
-        value: profileData.email,
+        value: profile.email,
         placeholder: 'Почта',
         label: 'Почта',
         onBlur: (e) => {
@@ -31,19 +35,19 @@ export class ProfileEditPage extends Block {
           return '';
         },
       }),
-      InputLogin: new InputContainer({
-        id: 'login',
-        name: 'login',
+      InputDisplayName: new InputContainer({
+        id: 'displayName',
+        name: 'displayName',
         type: 'text',
-        label: 'Логин',
-        value: profileData.login,
-        placeholder: 'Логин',
+        label: 'Ник',
+        value: profile.displayName,
+        placeholder: 'Ник',
         onBlur: (e) => {
           if (e.target instanceof HTMLInputElement) {
-            const login = { login: e.target.value };
-            const messageError = validation('login', login.login);
+            const displayName = { displayName: e.target.value };
+            const messageError = validation('displayName', displayName.displayName);
             this.setProps({
-              ...login,
+              ...displayName,
               disabled: !!messageError,
             });
             return messageError;
@@ -55,7 +59,7 @@ export class ProfileEditPage extends Block {
         id: 'first_name',
         name: 'first_name',
         type: 'text',
-        value: profileData.first_name,
+        value: profile.firstName,
         label: 'Имя',
         placeholder: 'Имя',
         onBlur: (e) => {
@@ -75,7 +79,7 @@ export class ProfileEditPage extends Block {
         id: 'second_name',
         name: 'second_name',
         type: 'text',
-        value: profileData.second_name,
+        value: profile.secondName,
         placeholder: 'Фамилия',
         label: 'Фамилия',
         onBlur: (e) => {
@@ -96,7 +100,7 @@ export class ProfileEditPage extends Block {
         id: 'phone',
         name: 'phone',
         type: 'tel',
-        value: profileData.phone,
+        value: profile.phone,
         placeholder: 'Телефон',
         label: 'Телефон',
         onBlur: (e) => {
@@ -116,21 +120,36 @@ export class ProfileEditPage extends Block {
       ButtonSave: new Button({
         id: 'register-button',
         text: 'Сохранить',
-        onClick: () => {
-          if (
-            this.props.email &&
-            this.props.login &&
-            this.props.first_name &&
-            this.props.second_name &&
-            this.props.phone
-          ) {
-            console.log({
-              email: this.props.email,
-              login: this.props.login,
-              first_name: this.props.first_name,
-              second_name: this.props.second_name,
-              phone: this.props.phone,
+        onClick: async () => {
+          try {
+            UserController.updateProfile({
+              first_name: this.props.first_name ?? profile.firstName,
+              second_name: this.props.second_name ?? profile.secondName,
+              email: this.props.email ?? profile.email,
+              phone: this.props.phone ?? profile.phone,
+              display_name: this.props.displayName ?? profile.displayName,
             });
+
+            if (this.props.avatar) {
+              console.log(this.props.avatar);
+              await UserController.updateAvatar(this.props.avatar);
+            }
+
+            router.go('/settings');
+          } catch (e) {
+            store.set('error', e);
+          }
+        },
+      }),
+      Avatar: new Avatar({
+        name: profile.firstName,
+        avatarUrl: profile.avatar,
+        isEdit: true,
+        onChange: (e) => {
+          if (e.target instanceof HTMLInputElement && e.target.files) {
+            const formData = new window.FormData();
+            formData.append('avatar', e.target.files[0]);
+            this.setProps({ avatar: formData });
           }
         },
       }),
@@ -142,12 +161,11 @@ export class ProfileEditPage extends Block {
     <div class="app">
   <div class="profile-container">
     <header>
-    <div class="contact-avatar"></div>
-    <h2>Имя</h2>
+    {{{ Avatar }}}
     </header>
     <main>
       {{{InputEmail}}}
-      {{{InputLogin}}}
+      {{{InputDisplayName}}}
       {{{InputFirstName}}}
       {{{InputSecondName}}}
       {{{InputPhone}}}
@@ -160,3 +178,4 @@ export class ProfileEditPage extends Block {
 `;
   }
 }
+export default connect(ProfileEditPage);

@@ -1,10 +1,12 @@
 import { Button } from '../../components/Button';
 import { ButtonSecond } from '../../components/ButtonSecond';
 import { InputContainer } from '../../components/InputContainer';
+import AuthController from '../../controllers/AuthController';
 import Block from '../../framework/Block';
+import { router } from '../../framework/Router';
 import { validation } from '../../utils/validationField';
 
-export class SignInPage extends Block {
+export class SignInPage extends Block<StringIndexed> {
   constructor() {
     super({
       InputEmail: new InputContainer({
@@ -121,28 +123,26 @@ export class SignInPage extends Block {
         id: 'register-button',
         text: 'Зарегистрироваться',
         onClick: () => {
-          if (
-            this.props.email &&
-            this.props.login &&
-            this.props.first_name &&
-            this.props.second_name &&
-            this.props.phone &&
-            this.props.pa
-          ) {
-            console.log({
-              email: this.props.email,
-              login: this.props.login,
-              first_name: this.props.first_name,
-              second_name: this.props.second_name,
-              phone: this.props.phone,
-              password: this.props.password,
-            });
+          const { phone, email, first_name, second_name, password, login } = this.props;
+          if (phone && email && first_name && second_name && password && login) {
+            const form = {
+              phone,
+              email,
+              first_name,
+              second_name,
+              password,
+              login,
+            };
+            AuthController.register(form);
           }
         },
       }),
       ButtonEnter: new ButtonSecond({
         id: 'enter-button',
         text: 'Войти?',
+        onClick: () => {
+          router.go('/');
+        },
       }),
     });
   }

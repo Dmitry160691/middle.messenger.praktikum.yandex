@@ -1,14 +1,14 @@
 import Block from '../framework/Block';
 
 interface ButtonProps {
-  id: string;
+  id?: string;
   text: string;
   class?: string;
   onClick?: (e: Event) => void;
   disabled?: boolean;
 }
 
-export class Button extends Block {
+export class Button extends Block<StringIndexed> {
   constructor(props: ButtonProps) {
     super({
       ...props,

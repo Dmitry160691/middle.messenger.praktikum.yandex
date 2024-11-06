@@ -1,19 +1,19 @@
 import { Button } from '../../components/Button';
-import { Contact } from '../../components/Contact';
+import { ButtonSecond } from '../../components/ButtonSecond';
 import { Dialog } from '../../components/Dialog';
 import { InputContainer } from '../../components/InputContainer';
 import { Logo } from '../../components/Logo';
+import { ModalNewChat } from '../../components/ModalNewChat';
+import chatsController from '../../controllers/ChatController';
+import MessagesController from '../../controllers/MessagesController';
 import Block from '../../framework/Block';
-import { DialogData } from '../../types';
+import { connect } from '../../framework/HOC';
+import { router } from '../../framework/Router';
+import { store } from '../../framework/Store';
 import { validation } from '../../utils/validationField';
 
-interface PageProps {
-  contacts: DialogData[];
-  selectContact?: DialogData;
-}
-
-export class MessagesPage extends Block {
-  constructor({ contacts, selectContact }: PageProps) {
+class MessagesPage extends Block<StringIndexed> {
+  constructor() {
     super({
       LogoStar: new Logo({
         class: 'logo-star',
@@ -21,14 +21,31 @@ export class MessagesPage extends Block {
       LogoSetting: new Logo({
         id: 'logo-setting',
         class: 'logo-setting',
+        onClick: () => {
+          router.go('/settings');
+        },
       }),
       ButtonSend: new Button({
         id: 'send-mail-button',
         text: 'Отправить',
         disabled: true,
-        onClick: () => {
-          if (this.props.message) {
-            console.log({ message: this.props.message });
+        onClick: async () => {
+          const selectedContact = store.getState().selectedContact;
+
+          if (selectedContact && this.props.messageForSend) {
+            await MessagesController.postMessage(selectedContact?.id, this.props.messageForSend);
+          }
+
+          const AllMessages = store.getState().messages;
+
+          console.log(store.getState().messages);
+
+          const messages = Object.entries(AllMessages).find(
+            (item) => Number(item[0]) === selectedContact?.id,
+          );
+
+          if (messages && !!messages.length) {
+            store.set('activeMessages', messages[1]);
           }
         },
       }),
@@ -39,10 +56,11 @@ export class MessagesPage extends Block {
         placeholder: 'Сообщение',
         onBlur: (e) => {
           if (e.target instanceof HTMLInputElement) {
-            const message = { message: e.target.value };
-            const messageError = validation('message', message.message);
+            const messageSend = { message: e.target.value };
+            store.set('messageForSend', messageSend.message);
+            const messageError = validation('message', messageSend.message);
             this.setProps({
-              ...message,
+              ...messageSend,
               disabled: !!messageError,
             });
             return messageError;
@@ -50,23 +68,30 @@ export class MessagesPage extends Block {
           return '';
         },
       }),
-      Contacts: contacts.map((item) => {
-        return new Contact({
-          contactInfo: item,
-          lastDialog: item.dialog[item.dialog.length - 1],
-          selectContact: selectContact,
-          onClick: () => {
-            this.setProps({
-              selectContact: item,
-            });
-          },
-        });
-      }),
       Dialog: new Dialog(),
+      ButtonNewChat: new ButtonSecond({
+        id: 'new-chat-button',
+        text: 'Новый чат',
+        onClick: () => {
+          store.set('modalIsVisible', true);
+
+          const input = document.getElementById('createChatInput');
+
+          if (input instanceof HTMLInputElement) {
+            input.value = '';
+          }
+        },
+      }),
+      Modal: new ModalNewChat({
+        onClick: () => {
+          store.set('modalIsVisible', false);
+        },
+      }),
     });
+    chatsController.getChats();
   }
 
-  render() {
+  override render() {
     return `
     <div class="app">
   <div class="messages-container">
@@ -79,6 +104,10 @@ export class MessagesPage extends Block {
         {{{LogoSetting}}}
       </div>
       <hr />
+      <div>
+        {{{ButtonNewChat}}}
+      </div>
+      <hr />
       {{{Contacts}}}
     </sidebar>
     <main class="messages-list">
@@ -88,8 +117,11 @@ export class MessagesPage extends Block {
         {{{ButtonSend}}}
       </div>
     </main>
+    {{#if modalIsVisible}} {{{Modal}}} {{/if}}
   </div>
 </div>
 `;
   }
 }
+
+export default connect(MessagesPage);

@@ -23,6 +23,10 @@ interface DataParamValid {
     REGEXP: RegExp;
     message: string;
   };
+  chatTitle: {
+    REGEXP: RegExp;
+    message: string;
+  };
 }
 
 const paramValid: DataParamValid = {
@@ -52,6 +56,10 @@ const paramValid: DataParamValid = {
   phone: {
     REGEXP: /\+?[0-9]{10,15}/,
     message: 'от 10 до 15 символов, состоит из цифр, может начинается с плюса',
+  },
+  chatTitle: {
+    REGEXP: /^[a-zA-Z0-9].*$/,
+    message: 'от 1 символа',
   },
 };
 

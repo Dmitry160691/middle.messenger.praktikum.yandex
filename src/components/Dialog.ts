@@ -1,40 +1,81 @@
+import chatsController from '../controllers/ChatController';
 import Block from '../framework/Block';
+import { store } from '../framework/Store';
+import { ModalNewUser } from './ModalNewUser';
+import { ModalDeleteUser } from './ModalDeleteUser';
+import { ButtonSecond } from './ButtonSecond';
 
-export class Dialog extends Block {
+export class Dialog extends Block<StringIndexed> {
   constructor() {
     super({
-      events: {
-        click: () => {
-          console.log(this.props.selectContact);
+      DeleteChatButton: new ButtonSecond({
+        text: '- Чат',
+        onClick: async () => {
+          const selectedContact = store.getState().selectedContact;
+
+          if (selectedContact) {
+            await chatsController.delete(selectedContact.id);
+
+            store.set('selectedContact', { id: 0 });
+          }
         },
-      },
+      }),
+      NewUserButton: new ButtonSecond({
+        text: '+ Собеседник',
+        onClick: async () => {
+          store.set('modalAddUserVisible', true);
+        },
+      }),
+      DeleteUserButton: new ButtonSecond({
+        text: '- Собеседник',
+        onClick: async () => {
+          store.set('modalRemoveUserVisible', true);
+        },
+      }),
+      ModalAddUser: new ModalNewUser({
+        onClick: () => {
+          store.set('modalAddUserVisible', false);
+        },
+      }),
+      ModalRemoveUser: new ModalDeleteUser({
+        onClick: () => {
+          store.set('modalRemoveUserVisible', false);
+        },
+      }),
     });
   }
 
-  render(): string {
+  override render(): string {
     return `
     <div>
       <div class="messages-list-header">
-        <div class="contact-avatar"></div>
-        <p>{{selectContact.name}}</p>
+        <div class="contact-avatar">{{#if selectedContact.avatar }}<img src="{{selectedContact.avatar}} />"{{else}}{{/if}}</div>
+        <p>{{selectedContact.title}}</p>
+         <div class="chat-btn">
+                {{{DeleteUserButton}}}
+                  {{{NewUserButton}}}
+                  {{{ DeleteChatButton }}}
+                </div>
       </div>
       <div class="messages-list-dialog">
-       {{#if selectContact.dialog.length }}
-          {{# each selectContact.dialog}}
-            <div 
-              {{#if isYou}}
-                class="send"
-                {{else}}
+       {{#if activeMessages }}
+          {{# each activeMessages}}
+           <div 
+           {{#if (ifEquals user_id ../../profileState.profile.id )}}
                 class="receive"
+                {{else}}
+                class="send"
               {{/if}}
               >
-              <p>{{text}}</p>
+              {{content}} 
               </div>
          {{/each}}
          {{else}}
-            <div>С кем хотите пообщаться?</div>
+            <div>Сообщений пока нет</div>
         {{/if}}
          </div>
+          {{#if modalAddUserVisible}} {{{ModalAddUser}}} {{/if}}
+          {{#if modalRemoveUserVisible}} {{{ModalRemoveUser}}} {{/if}}
       </div>
     `;
   }

@@ -11,7 +11,7 @@ interface InputContainerProps {
   onBlur: (e: Event) => string;
 }
 
-export class InputContainer extends Block {
+export class InputContainer extends Block<StringIndexed> {
   constructor(props: InputContainerProps) {
     super({
       ...props,
@@ -20,9 +20,9 @@ export class InputContainer extends Block {
         onBlur: (e: Event) => {
           if (props.onBlur) {
             const error = props.onBlur(e);
-            const message = !!error ? error : undefined;
+            const messageError = !!error ? error : undefined;
             this.setProps({
-              message: message,
+              messageError: messageError,
             });
           }
         },
@@ -34,7 +34,7 @@ export class InputContainer extends Block {
     return `<div class="inputContainer">
               {{# if label }}<p>{{ label }}</p>{{/if}}
               {{{ Input }}}
-              {{# if message }}<div class="helper-message">{{ message }}</div>{{/if}}
+              {{# if messageError }}<div class="helper-message">{{ messageError }}</div>{{/if}}
           </div>`;
   }
 }
