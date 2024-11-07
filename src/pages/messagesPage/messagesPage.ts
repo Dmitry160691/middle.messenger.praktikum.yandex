@@ -69,6 +69,9 @@ class MessagesPage extends Block<StringIndexed> {
           if (e.target instanceof HTMLInputElement) {
             const messageSend = e.target.value;
             store.set('messageForSend', messageSend);
+            this.setProps({
+              disabled: false
+            })
           }
         },
       }),

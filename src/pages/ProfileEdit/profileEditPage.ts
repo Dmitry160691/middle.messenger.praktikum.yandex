@@ -131,7 +131,6 @@ class ProfileEditPage extends Block<StringIndexed> {
             });
 
             if (this.props.avatar) {
-              console.log(this.props.avatar);
               await UserController.updateAvatar(this.props.avatar);
             }
 
@@ -178,4 +177,4 @@ class ProfileEditPage extends Block<StringIndexed> {
 `;
   }
 }
-export default connect(ProfileEditPage);
+export default ProfileEditPage;
