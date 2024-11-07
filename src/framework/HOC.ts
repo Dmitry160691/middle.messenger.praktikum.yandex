@@ -3,7 +3,7 @@ import Block from './Block';
 import { store, StoreEvents } from './Store';
 
 export function connect(Component: typeof Block<StringIndexed>) {
-  console.log('sss');
+ 
   return class extends Component {
     constructor(...args: any) {
       super({ ...args });
