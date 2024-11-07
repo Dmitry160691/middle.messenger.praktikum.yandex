@@ -22,6 +22,8 @@ export class Contact extends Block<StringIndexed> {
           props.onClick && props.onClick();
         },
       },
+      selectContact: props.selectContact,
+      currentChat: props.currentChat
     });
   }
 

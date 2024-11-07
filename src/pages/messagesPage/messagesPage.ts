@@ -1,5 +1,6 @@
 import { Button } from '../../components/Button';
 import { ButtonSecond } from '../../components/ButtonSecond';
+import { Contact } from '../../components/Contact';
 import { Dialog } from '../../components/Dialog';
 import { Input } from '../../components/Input';
 import { Logo } from '../../components/Logo';
@@ -13,7 +14,18 @@ import { store } from '../../framework/Store';
 
 class MessagesPage extends Block<StringIndexed> {
   constructor() {
+    const { chats, selectedContact } = store.getState();
     super({
+      Contacts: chats.map(
+        (currentChat) =>
+          new Contact({
+            selectContact: selectedContact?.id,
+            currentChat,
+            onClick: () => {
+              store.set('selectedContact', currentChat);
+            }
+          }),
+      ),
       LogoStar: new Logo({
         class: 'logo-star',
       }),
