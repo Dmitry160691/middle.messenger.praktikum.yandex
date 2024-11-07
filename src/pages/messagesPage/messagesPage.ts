@@ -1,7 +1,7 @@
 import { Button } from '../../components/Button';
 import { ButtonSecond } from '../../components/ButtonSecond';
 import { Dialog } from '../../components/Dialog';
-import { InputContainer } from '../../components/InputContainer';
+import { Input } from '../../components/Input';
 import { Logo } from '../../components/Logo';
 import { ModalNewChat } from '../../components/ModalNewChat';
 import chatsController from '../../controllers/ChatController';
@@ -10,7 +10,6 @@ import Block from '../../framework/Block';
 import { connect } from '../../framework/HOC';
 import { router } from '../../framework/Router';
 import { store } from '../../framework/Store';
-import { validation } from '../../utils/validationField';
 
 class MessagesPage extends Block<StringIndexed> {
   constructor() {
@@ -49,23 +48,16 @@ class MessagesPage extends Block<StringIndexed> {
           }
         },
       }),
-      InputMessage: new InputContainer({
+      InputMessage: new Input({
         id: 'message',
         name: 'message',
         type: 'text',
         placeholder: 'Сообщение',
         onBlur: (e) => {
           if (e.target instanceof HTMLInputElement) {
-            const messageSend = { message: e.target.value };
-            store.set('messageForSend', messageSend.message);
-            const messageError = validation('message', messageSend.message);
-            this.setProps({
-              ...messageSend,
-              disabled: !!messageError,
-            });
-            return messageError;
+            const messageSend = e.target.value;
+            store.set('messageForSend', messageSend);
           }
-          return '';
         },
       }),
       Dialog: new Dialog(),
