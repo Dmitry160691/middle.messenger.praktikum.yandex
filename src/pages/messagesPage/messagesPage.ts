@@ -23,7 +23,7 @@ class MessagesPage extends Block<StringIndexed> {
             currentChat,
             onClick: () => {
               store.set('selectedContact', currentChat);
-            }
+            },
           }),
       ),
       LogoStar: new Logo({
@@ -70,8 +70,8 @@ class MessagesPage extends Block<StringIndexed> {
             const messageSend = e.target.value;
             store.set('messageForSend', messageSend);
             this.setProps({
-              disabled: false
-            })
+              disabled: false,
+            });
           }
         },
       }),

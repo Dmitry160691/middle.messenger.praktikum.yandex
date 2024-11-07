@@ -177,4 +177,4 @@ class ProfileEditPage extends Block<StringIndexed> {
 `;
   }
 }
-export default ProfileEditPage;
+export default connect(ProfileEditPage);

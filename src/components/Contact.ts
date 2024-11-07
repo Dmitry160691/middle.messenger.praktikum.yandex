@@ -23,7 +23,7 @@ export class Contact extends Block<StringIndexed> {
         },
       },
       selectContact: props.selectContact,
-      currentChat: props.currentChat
+      currentChat: props.currentChat,
     });
   }
 
