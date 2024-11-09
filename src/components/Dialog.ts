@@ -49,7 +49,9 @@ export class Dialog extends Block<StringIndexed> {
     return `
     <div>
       <div class="messages-list-header">
-        <div class="contact-avatar">{{#if selectedContact.avatar }}<img src="{{selectedContact.avatar}} />"{{else}}{{/if}}</div>
+        <div class="contact-avatar">
+        <img class="chat-avatar" alt="аватар {{currentChat.title}}" src="{{#if currentChat.avatar }}https://ya-praktikum.tech/api/v2/resources{{currentChat.avatar}}{{else}}/src/assets/chat-avatar.svg{{/if}}"  />
+        </div>
         <p>{{selectedContact.title}}</p>
          <div class="chat-btn">
                 {{{DeleteUserButton}}}
@@ -57,8 +59,9 @@ export class Dialog extends Block<StringIndexed> {
                   {{{ DeleteChatButton }}}
                 </div>
       </div>
+      <hr />
+      {{#if activeMessages }}
       <div class="messages-list-dialog">
-       {{#if activeMessages }}
           {{# each activeMessages}}
            <div 
            {{#if (ifEquals user_id ../../profileState.profile.id )}}
@@ -70,10 +73,10 @@ export class Dialog extends Block<StringIndexed> {
               {{content}} 
               </div>
          {{/each}}
-         {{else}}
-            <div>Сообщений пока нет</div>
-        {{/if}}
          </div>
+         {{else}}
+            <div class="messages-list-dialog">Сообщений пока нет</div>
+        {{/if}}
           {{#if modalAddUserVisible}} {{{ModalAddUser}}} {{/if}}
           {{#if modalRemoveUserVisible}} {{{ModalRemoveUser}}} {{/if}}
       </div>

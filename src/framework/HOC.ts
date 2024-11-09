@@ -14,7 +14,7 @@ export function connect(Component: typeof Block<StringIndexed>) {
 
         const { chats, selectedContact } = storeState;
         if (!!chats.length) {
-          const newContacts = chats.map(
+          const newContacts = chats?.map(
             (currentChat) =>
               new Contact({
                 selectContact: selectedContact?.id,

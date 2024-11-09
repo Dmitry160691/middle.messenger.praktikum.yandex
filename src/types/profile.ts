@@ -28,7 +28,7 @@ export interface ChatState {
 }
 
 export interface Message {
-  sender: ESender;
+  sender: Sender;
   message: string;
   timeSend: string;
   isReading: boolean;
@@ -43,13 +43,13 @@ export interface ChatState {
   messages: Message[];
 }
 
-export enum ESender {
+export enum Sender {
   Me = 'me',
   Partner = 'partner',
 }
 
 export interface Message {
-  sender: ESender;
+  sender: Sender;
   message: string;
   timeSend: string;
   isReading: boolean;

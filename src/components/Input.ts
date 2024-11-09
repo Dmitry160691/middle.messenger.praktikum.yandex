@@ -6,6 +6,7 @@ export interface InputProps {
   type: string;
   placeholder?: string;
   value?: string;
+  class?: string;
   onBlur?: (e: Event) => void;
   onClick?: (e: Event) => void;
   onChange?: (e: Event) => void;
@@ -31,6 +32,6 @@ export class Input extends Block<StringIndexed> {
   }
 
   render() {
-    return '<input id="{{id}}" {{#if readonly }}readonly{{/if}} type="{{#if type }}{{type}}{{else}}text{{/if}}" name="{{name}}" value="{{value}}" placeholder="{{placeholder}}" class="hidden-border {{#if class }}{{class}}{{else}}input{{/if}}"/>';
+    return '<input id="{{id}}" type="{{type}}" name="{{name}}" value="{{value}}" placeholder="{{placeholder}}" class="hidden-border {{#if class }}{{class}}{{else}}input{{/if}}"/>';
   }
 }

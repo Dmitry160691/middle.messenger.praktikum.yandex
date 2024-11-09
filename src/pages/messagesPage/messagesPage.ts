@@ -16,7 +16,7 @@ class MessagesPage extends Block<StringIndexed> {
   constructor() {
     const { chats, selectedContact } = store.getState();
     super({
-      Contacts: chats.map(
+      Contacts: chats?.map(
         (currentChat) =>
           new Contact({
             selectContact: selectedContact?.id,
@@ -48,8 +48,6 @@ class MessagesPage extends Block<StringIndexed> {
           }
 
           const AllMessages = store.getState().messages;
-
-          console.log(store.getState().messages);
 
           const messages = Object.entries(AllMessages).find(
             (item) => Number(item[0]) === selectedContact?.id,
@@ -115,14 +113,24 @@ class MessagesPage extends Block<StringIndexed> {
         {{{ButtonNewChat}}}
       </div>
       <hr />
+      <div class="contacts">
       {{{Contacts}}}
+      </div>
     </sidebar>
     <main class="messages-list">
       {{{Dialog}}}
+      {{#if activeMessages }}
       <div class="messages-list-footer">
         {{{InputMessage}}}
         {{{ButtonSend}}}
       </div>
+      {{else}}
+      <hr />
+      <div class="messages-list-footer">
+        {{{InputMessage}}}
+        {{{ButtonSend}}}
+      </div>
+      {{/if}}
     </main>
     {{#if modalIsVisible}} {{{Modal}}} {{/if}}
   </div>

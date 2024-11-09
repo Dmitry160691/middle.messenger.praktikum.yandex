@@ -14,7 +14,6 @@ interface InputContainerProps {
 export class InputContainer extends Block<StringIndexed> {
   constructor(props: InputContainerProps) {
     super({
-      ...props,
       Input: new Input({
         ...props,
         onBlur: (e: Event) => {
