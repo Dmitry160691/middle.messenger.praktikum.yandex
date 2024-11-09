@@ -49,9 +49,7 @@ export class Dialog extends Block<StringIndexed> {
     return `
     <div>
       <div class="messages-list-header">
-        <div class="contact-avatar">
-        <img class="chat-avatar" alt="аватар {{currentChat.title}}" src="{{#if currentChat.avatar }}https://ya-praktikum.tech/api/v2/resources{{currentChat.avatar}}{{else}}/src/assets/chat-avatar.svg{{/if}}"  />
-        </div>
+        <div class="contact-avatar">{{#if currentChat.avatar }}<img src="{{currentChat.avatar}} />"{{else}}{{/if}}</div>
         <p>{{selectedContact.title}}</p>
          <div class="chat-btn">
                 {{{DeleteUserButton}}}

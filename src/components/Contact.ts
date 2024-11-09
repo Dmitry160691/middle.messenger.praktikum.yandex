@@ -25,9 +25,7 @@ export class Contact extends Block<StringIndexed> {
     return `
     <div>
           <div class="contact-container {{#if (ifEquals selectContact currentChat.id)}}contact-selected{{/if}}">
-                <div class="contact-avatar">
-                <img class="chat-avatar" alt="аватар {{currentChat.title}}" src="{{#if currentChat.avatar }}https://ya-praktikum.tech/api/v2/resources{{currentChat.avatar}}{{else}}/src/assets/chat-avatar.svg{{/if}}"  />
-                </div>
+                <div class="contact-avatar">{{#if currentChat.avatar }}<img src="{{currentChat.avatar}} />"{{else}}{{/if}}</div>
                   <div class="contact">
                     <div class="contact-header">
                       <div class="contact-name"><p>{{currentChat.title}}</p></div>
