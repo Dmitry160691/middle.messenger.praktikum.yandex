@@ -1,10 +1,12 @@
 import { Button } from '../../components/Button';
 import { ButtonSecond } from '../../components/ButtonSecond';
 import { InputContainer } from '../../components/InputContainer';
+import { router } from '../../framework/Router';
 import Block from '../../framework/Block';
 import { validation } from '../../utils/validationField';
+import AuthController from '../../controllers/AuthController';
 
-export class AuthPage extends Block {
+export class AuthPage extends Block<StringIndexed> {
   constructor() {
     super({
       InputLogin: new InputContainer({
@@ -52,7 +54,7 @@ export class AuthPage extends Block {
             validation('login', this.props.login) === '' &&
             validation('password', this.props.password) === ''
           ) {
-            console.log({
+            AuthController.login({
               login: this.props.login,
               password: this.props.password,
             });
@@ -62,6 +64,7 @@ export class AuthPage extends Block {
       ButtonsignIn: new ButtonSecond({
         id: 'sign-in-button',
         text: 'Нет акаунта?',
+        onClick: () => router.go('/sign-up'),
       }),
     });
   }

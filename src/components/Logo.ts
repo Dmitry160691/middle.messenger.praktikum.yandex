@@ -6,7 +6,7 @@ interface LogoProps {
   onClick?: (e: Event) => void;
 }
 
-export class Logo extends Block {
+export class Logo extends Block<StringIndexed> {
   constructor(props: LogoProps) {
     super({
       ...props,

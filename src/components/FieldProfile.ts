@@ -5,7 +5,7 @@ interface FieldProfileProps {
   fieldValue: string;
 }
 
-export class FieldProfile extends Block {
+export class FieldProfile extends Block<StringIndexed> {
   constructor(props: FieldProfileProps) {
     super({ ...props });
   }

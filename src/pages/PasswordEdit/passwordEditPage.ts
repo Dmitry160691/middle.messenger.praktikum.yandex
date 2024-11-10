@@ -1,10 +1,17 @@
+import { Avatar } from '../../components/Avatar';
 import { Button } from '../../components/Button';
 import { InputContainer } from '../../components/InputContainer';
+import UserController from '../../controllers/UserController';
 import Block from '../../framework/Block';
+import { router } from '../../framework/Router';
+import { store } from '../../framework/Store';
 import { validation } from '../../utils/validationField';
 
-export class PasswordEditPage extends Block {
+export class PasswordEditPage extends Block<StringIndexed> {
   constructor() {
+    const { profileState } = store.getState();
+
+    const { profile } = profileState;
     super({
       InputOldPass: new InputContainer({
         id: 'oldPassword',
@@ -46,14 +53,30 @@ export class PasswordEditPage extends Block {
         id: 'save-password',
         text: 'Сохранить',
         disabled: true,
-        onClick: () => {
+        onClick: async () => {
           if (
             validation('oldPassword', this.props.oldPassword) === '' &&
             validation('password', this.props.newPassword) === ''
           ) {
-            console.log('Старый пароль не пустой, Новый пароль валидный. Ок');
+            const res = await UserController.updatePassword({
+              oldPassword: this.props.oldPassword,
+              newPassword: this.props.newPassword,
+            });
+
+            if (res && res.status === 'error') {
+              this.setProps({
+                Error: res.message,
+              });
+            } else {
+              router.go('/settings');
+            }
           }
         },
+      }),
+      Avatar: new Avatar({
+        name: profile.firstName,
+        avatarUrl: profile.avatar,
+        isEdit: false,
       }),
     });
   }
@@ -63,13 +86,14 @@ export class PasswordEditPage extends Block {
     <div class="app">
   <div class="profile-container">
     <header >
-    <div class="contact-avatar"></div>
+    {{{ Avatar }}}
     </header>
     <main>
       {{{InputOldPass}}}
       {{{InputNewPass}}}
   </main>
   <footer>
+    {{Error}}
     {{{ButtonSave}}}
   </footer>
   </div>

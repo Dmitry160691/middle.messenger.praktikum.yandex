@@ -1,12 +1,14 @@
 import { Button } from '../../components/Button';
 import Block from '../../framework/Block';
+import { router } from '../../framework/Router';
 
-export class NotFoundPage extends Block {
+export class NotFoundPage extends Block<StringIndexed> {
   constructor() {
     super({
       Button: new Button({
         id: 'return',
         text: 'На главную',
+        onClick: () => router.go('/'),
       }),
     });
   }

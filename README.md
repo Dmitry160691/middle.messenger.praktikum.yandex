@@ -20,4 +20,4 @@ https://www.figma.com/design/jF5fFFzgGOxQeB4CmKWTiE/Chat_external_link?node-id=0
 
 ### На веб-приложение:
 
-Netlify: https://deploy-preview-2--deluxe-paletas-0451a0.netlify.app/
+Netlify: https://deploy-preview-4--deluxe-paletas-0451a0.netlify.app/

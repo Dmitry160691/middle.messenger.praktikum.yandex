@@ -6,10 +6,13 @@ export interface InputProps {
   type: string;
   placeholder?: string;
   value?: string;
+  class?: string;
   onBlur?: (e: Event) => void;
+  onClick?: (e: Event) => void;
+  onChange?: (e: Event) => void;
 }
 
-export class Input extends Block {
+export class Input extends Block<StringIndexed> {
   constructor(props: InputProps) {
     super({
       ...props,
@@ -22,13 +25,13 @@ export class Input extends Block {
             this.setProps({ value: e.target.value });
           }
         },
+        change: (e: Event) => props.onChange && props.onChange(e),
+        click: (e: Event) => props.onClick && props.onClick(e),
       },
     });
   }
 
-  render(): string {
-    return `
-      <input id="{{id}}" name="{{name}}" type="{{type}}" placeholder="{{placeholder}}" value="{{value}}" class="input">
-      `;
+  render() {
+    return '<input id="{{id}}" type="{{type}}" name="{{name}}" value="{{value}}" placeholder="{{placeholder}}" class="hidden-border {{#if class }}{{class}}{{else}}input{{/if}}"/>';
   }
 }
