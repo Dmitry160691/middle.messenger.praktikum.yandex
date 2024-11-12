@@ -1,5 +1,5 @@
 import { Button } from '../../components/Button';
-import Block from '../../framework/Block';
+import { Block } from '../../framework/Block';
 import { router } from '../../framework/Router';
 
 export class ErrorPage extends Block<StringIndexed> {

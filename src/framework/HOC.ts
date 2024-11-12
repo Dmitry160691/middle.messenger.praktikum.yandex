@@ -1,5 +1,5 @@
 import { Contact } from '../components/Contact';
-import Block from './Block';
+import { Block } from './Block';
 import { store, StoreEvents } from './Store';
 
 export function connect(Component: typeof Block<StringIndexed>) {

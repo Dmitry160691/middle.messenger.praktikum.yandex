@@ -2,7 +2,7 @@ import { Avatar } from '../../components/Avatar';
 import { Button } from '../../components/Button';
 import { InputContainer } from '../../components/InputContainer';
 import UserController from '../../controllers/UserController';
-import Block from '../../framework/Block';
+import { Block } from '../../framework/Block';
 import { connect } from '../../framework/HOC';
 import { router } from '../../framework/Router';
 import { store } from '../../framework/Store';

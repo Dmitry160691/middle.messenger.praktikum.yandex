@@ -1,9 +1,10 @@
 import chatsController from '../controllers/ChatController';
-import Block from '../framework/Block';
+
 import { store } from '../framework/Store';
 import { ModalNewUser } from './ModalNewUser';
 import { ModalDeleteUser } from './ModalDeleteUser';
 import { ButtonSecond } from './ButtonSecond';
+import { Block } from '../framework/Block';
 
 export class Dialog extends Block<StringIndexed> {
   constructor() {

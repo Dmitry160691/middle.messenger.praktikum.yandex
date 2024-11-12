@@ -2,7 +2,7 @@ import { Button } from '../../components/Button';
 import { ButtonSecond } from '../../components/ButtonSecond';
 import { InputContainer } from '../../components/InputContainer';
 import AuthController from '../../controllers/AuthController';
-import Block from '../../framework/Block';
+import { Block } from '../../framework/Block';
 import { router } from '../../framework/Router';
 import { validation } from '../../utils/validationField';
 

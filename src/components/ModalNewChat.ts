@@ -1,5 +1,5 @@
 import chatsController from '../controllers/ChatController';
-import Block from '../framework/Block';
+import { Block } from '../framework/Block';
 import { store } from '../framework/Store';
 import { validation } from '../utils/validationField';
 import { Button } from './Button';

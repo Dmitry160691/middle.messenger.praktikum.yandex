@@ -7,7 +7,7 @@ import { Logo } from '../../components/Logo';
 import { ModalNewChat } from '../../components/ModalNewChat';
 import chatsController from '../../controllers/ChatController';
 import MessagesController from '../../controllers/MessagesController';
-import Block from '../../framework/Block';
+import { Block } from '../../framework/Block';
 import { connect } from '../../framework/HOC';
 import { router } from '../../framework/Router';
 import { store } from '../../framework/Store';

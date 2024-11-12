@@ -2,7 +2,7 @@ import { Avatar } from '../../components/Avatar';
 import { ButtonSecond } from '../../components/ButtonSecond';
 import { FieldProfile } from '../../components/FieldProfile';
 import AuthController from '../../controllers/AuthController';
-import Block from '../../framework/Block';
+import { Block } from '../../framework/Block';
 import { connect } from '../../framework/HOC';
 import { router } from '../../framework/Router';
 import { store } from '../../framework/Store';

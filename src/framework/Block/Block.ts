@@ -1,15 +1,15 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import EventBus from './EventBus';
-import Handlebars from 'handlebars';
 import { v4 as uuidv4 } from 'uuid';
-import { deepEqual } from '../utils/deepEqual';
+import EventBus from '../EventBus';
+import Handlebars from 'handlebars';
+import { deepEqual } from '../../utils/deepEqual';
 
 interface BlockProps {
   [key: string]: any;
 }
 
-export default class Block<P extends StringIndexed> {
+export class Block<P extends StringIndexed> {
   static EVENTS = {
     INIT: 'init',
     FLOW_CDM: 'flow:component-did-mount',
@@ -22,7 +22,7 @@ export default class Block<P extends StringIndexed> {
 
   protected _id: string = uuidv4();
 
-  protected props: BlockProps;
+  public props: BlockProps;
 
   protected children: StringIndexed;
 
