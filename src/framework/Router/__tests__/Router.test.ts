@@ -15,7 +15,7 @@ describe('Router', () => {
   const historyForwardStub = stub(history, 'forward');
 
   before(() => {
-    router.use('/pageOne', Test).use('/pageTwo', Test).start();
+    router.use('/page-one', Test).use('/page-two', Test).start();
     router.go('/');
   });
 
