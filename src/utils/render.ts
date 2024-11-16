@@ -1,4 +1,4 @@
-import Block from '../framework/Block';
+import { Block } from '../framework/Block';
 
 export const render = (query: string, block: Block<StringIndexed>) => {
   const root = document.querySelector(query);

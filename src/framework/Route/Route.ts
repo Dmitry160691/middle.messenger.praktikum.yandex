@@ -1,5 +1,5 @@
 import { render } from '../../utils/render';
-import Block from '../Block';
+import { Block } from '../Block';
 
 export interface IBlockClassInterface {
   new (props: StringIndexed): Block<StringIndexed>;
